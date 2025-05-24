@@ -1,0 +1,1 @@
+export { ListMyConnections } from "./component";
