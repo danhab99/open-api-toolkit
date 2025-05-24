@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { McpConnectionDefinition } from "../../../types";
+import { McpConnectionDefinition } from "../../types";
 
 export type NewConnectionCardProps = {
   mcpDef: McpConnectionDefinition;

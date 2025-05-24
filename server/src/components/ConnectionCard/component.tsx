@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { McpConnection } from "../../../types";
+import { McpConnection } from "../../types";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableBody, TableCell, TableRow } from "../ui/table";
 

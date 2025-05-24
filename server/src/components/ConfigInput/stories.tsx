@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ConfigInput } from "./component";
 import { fn } from "@storybook/test";
-import { exampleMcpConnection } from "../../../examples";
+import { exampleMcpConnection } from "../../examples";
 
 // More on how to set up stories at:
 // https://storybook.js.org/docs/writing-stories#default-export

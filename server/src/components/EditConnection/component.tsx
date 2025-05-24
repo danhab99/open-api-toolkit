@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Config, McpConnection } from "../../../types";
+import { Config, McpConnection } from "../../types";
 import { ConfigInput } from "../ConfigInput";
 import { Button } from "../ui/button";
 
