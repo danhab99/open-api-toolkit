@@ -1,0 +1,1 @@
+export { ConfigInput } from "./component";
