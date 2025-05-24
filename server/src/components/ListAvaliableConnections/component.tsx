@@ -1,6 +1,7 @@
 import React from "react";
 import { McpConnectionDefinition } from "../../../types";
 import { NewConnectionCard } from "../NewConnectionCard";
+import { Grid } from "../Grid";
 
 export type ListAvaliableConnectionsProps = {
   mcpDefs: McpConnectionDefinition[];
@@ -8,10 +9,10 @@ export type ListAvaliableConnectionsProps = {
 
 export function ListAvaliableConnections(props: ListAvaliableConnectionsProps) {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <Grid>
       {props.mcpDefs.map((def, i) => (
         <NewConnectionCard mcpDef={def} key={i} />
       ))}
-    </div>
+    </Grid>
   );
 }
