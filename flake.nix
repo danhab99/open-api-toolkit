@@ -18,8 +18,9 @@
           default = pkgs.mkShell {
             packages = with pkgs; [
               gnumake
-              nodejs_24
+              nodejs_22
               yarn 
+              prettierd
             ];
 
             shellHook = ''
