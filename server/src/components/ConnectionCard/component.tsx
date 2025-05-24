@@ -20,7 +20,7 @@ export type ConnectionCardProps = {
 
 export function ConnectionCard(props: ConnectionCardProps) {
   return (
-    <Card className="w-[350px]">
+    <Card>
       <CardHeader>
         <div className="flex flex-row align-center gap-4">
           <Switch checked={props.enable} />
