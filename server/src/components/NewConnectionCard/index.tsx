@@ -1,0 +1,1 @@
+export { NewConnectionCard } from "./component";
