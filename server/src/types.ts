@@ -1,23 +1,20 @@
-
-export type ID = string;
+export type ID = number;
 
 export type Identifier = {
   name: string;
   userDescription: string;
   aiDescription: string;
-}
+};
 
 export type ConfigArg = Identifier & {
   id: ID;
-  type: "string" | "number"
+  type: "string" | "number";
 };
 
-export type Resource = Identifier & {
-
-};
+export type Resource = Identifier & {};
 
 export type Tool = Identifier & {
-  arguments: ConfigArg[]
+  arguments: ConfigArg[];
 };
 
 export type McpConnectionDefinition = Identifier & {
@@ -33,6 +30,8 @@ export type Config = ConfigArg & {
 };
 
 export type McpConnection = Identifier & {
+  id: ID;
   mcp: McpConnectionDefinition;
   config: Config[];
+  enabled: boolean;
 };
