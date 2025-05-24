@@ -10,10 +10,15 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = env("DATABASE_PATH")
 }
 
 model Connection {
-
+  id              Int     @id @default(autoincrement())
+  connectionID    String
+  config          String
+  enable          Boolean
+  userDescription String
+  aiDescription   String
 }
