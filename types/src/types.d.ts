@@ -1,5 +1,3 @@
-export type ID = number;
-
 export type Identifier = {
   name: string;
   userDescription: string;
@@ -7,18 +5,18 @@ export type Identifier = {
 };
 
 export type ConfigArg = Identifier & {
-  id: ID;
   type: "string" | "number";
 };
 
-export type Resource = Identifier & {};
-
-export type Tool = Identifier & {
+export type Callable = {
   arguments: ConfigArg[];
+  handler: (args: Record<string, any>) => void;
 };
 
+export type Resource = Callable;
+export type Tool = Callable;
+
 export type OpenAPIConnectionDefinition = Identifier & {
-  id: ID;
   configurationArguments: ConfigArg[];
   resources: Resource[];
   tools: Tool[];
@@ -30,7 +28,6 @@ export type Config = ConfigArg & {
 };
 
 export type OpenAPIConnection = Identifier & {
-  id: ID;
   mcp: OpenAPIConnectionDefinition;
   config: Config[];
   enabled: boolean;
