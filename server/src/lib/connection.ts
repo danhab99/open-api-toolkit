@@ -5,6 +5,7 @@ import {
 } from "open-api-connector-types";
 import * as fs from "fs/promises";
 import { PrismaClient } from "open-api-db";
+import { Prisma } from "open-api-db/lib/generated/prisma/client";
 
 const cachedConnections: Record<string, OpenAPIConnectionDefinition> = {};
 
@@ -43,10 +44,10 @@ export async function importConnection(
 
 export async function getMyConnection(
   root: string,
-  id: number,
+  args: Prisma.ConnectionWhereInput,
 ): Promise<OpenAPIConnection | undefined> {
   const connectionDB = await db.connection.findFirst({
-    where: { id },
+    where: args,
   });
 
   if (!connectionDB) {

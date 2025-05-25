@@ -1,41 +1,32 @@
 import { listAvaliableConnections } from "@/lib/connection";
-import { NextRequest, NextResponse } from "next/server";
-import { Callable } from "open-api-connector-types";
+import { NextResponse } from "next/server";
 
-
-export async function GET(req: NextRequest) {
+export async function GET() {
   const connections = await listAvaliableConnections(__dirname);
 
   const paths: Record<string, any> = {};
 
   for (const connection of connections) {
-    const registerCallables = (callables: Callable[], method: string) => {
-      for (const r of callables) {
-        paths[`/llm/${r.name}`] = {
-          summary: r.aiDescription,
-        };
-
-        paths[`/llm/${r.name}/resource/${r.name}`] = {
-          [method]: {
-            parameters: r.arguments.map((arg) => ({
-              name: arg.name,
-              descriptin: arg.aiDescription,
-              in: "query",
-              schema: {
-                type: arg.type,
-              },
-            })),
-            summary: r.aiDescription,
-          },
-        };
-      }
+    paths[`/llm/${connection.name}`] = {
+      summary: connection.aiDescription,
     };
 
-    registerCallables(connection.resources, "get");
-    registerCallables(connection.tools, "post");
+    for (const r of connection.tools) {
+      paths[`/llm/${connection.name}/tool/${r.name}`] = {
+        post: {
+          parameters: r.arguments.map((arg) => ({
+            name: arg.name,
+            descriptin: arg.aiDescription,
+            in: "query",
+            schema: {
+              type: arg.type,
+            },
+          })),
+          summary: r.aiDescription,
+        },
+      };
+    }
   }
-
-  connections[0].resources[0].name;
 
   return new NextResponse(
     JSON.stringify({
