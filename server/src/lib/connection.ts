@@ -3,7 +3,7 @@
 import path from "path";
 import { OpenAPIConnection, OpenAPIConnectionDefinition } from "open-api-connector-types";
 import * as fs from "fs/promises";
-import { PrismaClient } from "../../lib/generated/prisma/index.js";
+import { PrismaClient } from "open-api-db";
 
 const CONNECTIONS_PATH: string = path.join(__dirname, "../../../../../connections");
 
