@@ -30,6 +30,8 @@
             PRISMA_SCHEMA_ENGINE_BINARY =
               "${pkgs.prisma-engines}/bin/schema-engine";
 
+            DATABASE_PATH="file:./db";
+
             shellHook = ''
             zsh
             '';

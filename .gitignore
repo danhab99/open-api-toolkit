@@ -1,1 +1,4 @@
+server/.next
 server/lib/generated/prisma
+server/node_modules
+server/prisma/db
