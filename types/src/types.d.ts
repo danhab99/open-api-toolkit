@@ -8,7 +8,7 @@ export type ConfigArg = Identifier & {
   type: "string" | "number";
 };
 
-export type Callable = {
+export type Callable = Identifier & {
   arguments: ConfigArg[];
   handler: (args: Record<string, any>) => void;
 };
