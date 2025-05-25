@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ListMyConnections } from "./component";
-import { exampleMcpConnection } from "../../examples";
+import { exampleOpenAPIConnection } from "../../examples";
 
 // More on how to set up stories at:
 // https://storybook.js.org/docs/writing-stories#default-export
@@ -20,16 +20,16 @@ type Story = StoryObj<typeof meta>;
 export const Test: Story = {
   args: {
     mcps: [
-      exampleMcpConnection,
-      exampleMcpConnection,
-      exampleMcpConnection,
-      exampleMcpConnection,
-      exampleMcpConnection,
-      exampleMcpConnection,
-      exampleMcpConnection,
-      exampleMcpConnection,
-      exampleMcpConnection,
-      exampleMcpConnection,
+      exampleOpenAPIConnection,
+      exampleOpenAPIConnection,
+      exampleOpenAPIConnection,
+      exampleOpenAPIConnection,
+      exampleOpenAPIConnection,
+      exampleOpenAPIConnection,
+      exampleOpenAPIConnection,
+      exampleOpenAPIConnection,
+      exampleOpenAPIConnection,
+      exampleOpenAPIConnection,
     ],
   },
 };

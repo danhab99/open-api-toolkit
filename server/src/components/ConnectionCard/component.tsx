@@ -9,13 +9,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { McpConnection } from "open-api-connector-types";
+import { OpenAPIConnection } from "open-api-connector-types";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableBody, TableCell, TableRow } from "../ui/table";
 
 export type ConnectionCardProps = {
   enable: boolean;
-  mcp: McpConnection;
+  mcp: OpenAPIConnection;
 };
 
 export function ConnectionCard(props: ConnectionCardProps) {

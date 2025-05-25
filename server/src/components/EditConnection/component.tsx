@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { Config, McpConnection } from "open-api-connector-types";
+import { Config, OpenAPIConnection } from "open-api-connector-types";
 import { ConfigInput } from "../ConfigInput";
 import { Button } from "../ui/button";
 
 export type EditConnectionProps = {
-  mcp: McpConnection;
+  mcp: OpenAPIConnection;
   onConfigsChanged: (c: Config[]) => void;
 };
 

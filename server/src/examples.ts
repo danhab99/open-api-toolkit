@@ -1,6 +1,6 @@
-import { McpConnection, McpConnectionDefinition } from "open-api-connector-types";
+import { OpenAPIConnection, OpenAPIConnectionDefinition } from "open-api-connector-types";
 
-export const exampleMcpConnection: McpConnection = {
+export const exampleOpenAPIConnection: OpenAPIConnection = {
   name: "Example Connection",
   userDescription: "A sample connection for testing",
   aiDescription:
@@ -80,7 +80,7 @@ export const exampleMcpConnection: McpConnection = {
   ],
 };
 
-export const exampleMcpConnectionDefinition: McpConnectionDefinition = {
+export const exampleOpenAPIConnectionDefinition: OpenAPIConnectionDefinition = {
   id: "mcp-def-001",
   name: "Weather Data Integration",
   userDescription: "Connects to a third-party weather API to fetch weather data",

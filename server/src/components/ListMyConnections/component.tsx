@@ -1,10 +1,10 @@
 import React from "react";
-import { McpConnection } from "open-api-connector-types";
+import { OpenAPIConnection } from "open-api-connector-types";
 import { Grid } from "../Grid";
 import { ConnectionCard } from "../ConnectionCard";
 
 export type ListMyConnectionsProps = {
-  mcps: McpConnection[];
+  mcps: OpenAPIConnection[];
 };
 
 export function ListMyConnections(props: ListMyConnectionsProps) {

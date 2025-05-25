@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { NewConnectionCard } from "./component";
-import { exampleMcpConnectionDefinition } from "../../examples";
+import { exampleOpenAPIConnectionDefinition } from "../../examples";
 
 // More on how to set up stories at:
 // https://storybook.js.org/docs/writing-stories#default-export
@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 export const Test: Story = {
   argTypes: {
     mcpDef: {
-      defaultValue: exampleMcpConnectionDefinition,
+      defaultValue: exampleOpenAPIConnectionDefinition,
     },
   },
 };

@@ -8,10 +8,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { McpConnectionDefinition } from "open-api-connector-types";
+import { OpenAPIConnectionDefinition } from "open-api-connector-types";
 
 export type NewConnectionCardProps = {
-  mcpDef: McpConnectionDefinition;
+  mcpDef: OpenAPIConnectionDefinition;
 };
 
 export function NewConnectionCard(props: NewConnectionCardProps) {

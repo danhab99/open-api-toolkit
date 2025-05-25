@@ -1,24 +1,24 @@
 "use server";
 
 import path from "path";
-import { McpConnection, McpConnectionDefinition } from "open-api-connector-types";
+import { OpenAPIConnection, OpenAPIConnectionDefinition } from "open-api-connector-types";
 import * as fs from "fs/promises";
 import { PrismaClient } from "../../lib/generated/prisma/index.js";
 
 const CONNECTIONS_PATH: string = path.join(__dirname, "../../../../../connections");
 
 export async function listAvaliableConnections(): Promise<
-  McpConnectionDefinition[]
+  OpenAPIConnectionDefinition[]
 > {
   const connectionDirs = await fs.readdir(CONNECTIONS_PATH);
 
-  const connetions: McpConnectionDefinition[] = await Promise.all(
+  const connetions: OpenAPIConnectionDefinition[] = await Promise.all(
     connectionDirs.map(
       (dir) =>
         importConnectionFile(
           dir,
           "manifest.json",
-        ) as Promise<McpConnectionDefinition>,
+        ) as Promise<OpenAPIConnectionDefinition>,
     ),
   );
 
@@ -28,7 +28,7 @@ export async function listAvaliableConnections(): Promise<
 async function importConnectionFile(
   connectionName: string,
   file: string,
-): Promise<Partial<McpConnectionDefinition>> {
+): Promise<Partial<OpenAPIConnectionDefinition>> {
   return require(path.join(CONNECTIONS_PATH, connectionName, file));
 }
 
@@ -39,7 +39,7 @@ const cachedConnections: Record<
 
 export async function importConnection(
   connectionName: string,
-): Promise<McpConnectionDefinition> {
+): Promise<OpenAPIConnectionDefinition> {
   if (connectionName in cachedConnections) {
     return cachedConnections[connectionName];
   }
@@ -47,7 +47,7 @@ export async function importConnection(
   const c = {
     ...(await importConnectionFile(connectionName, "manifest.json")),
     ...(await importConnectionFile(connectionName, "index.js")),
-  } as McpConnectionDefinition;
+  } as OpenAPIConnectionDefinition;
 
   cachedConnections[connectionName] = c;
   return c;
@@ -59,7 +59,7 @@ const CONNECTIONS_PER_PAGE = 20;
 
 export async function getMyConnections(
   page: number = 0,
-): Promise<McpConnection[]> {
+): Promise<OpenAPIConnection[]> {
   const connectionDBs = await db.connection.findMany({
     select: {
       id: true,
@@ -73,14 +73,14 @@ export async function getMyConnections(
 
   return Promise.all(
     connectionDBs.map(async ({ id }) => {
-      return getMyConnection(id) as Promise<McpConnection>;
+      return getMyConnection(id) as Promise<OpenAPIConnection>;
     }),
   );
 }
 
 export async function getMyConnection(
-  id: McpConnection["id"],
-): Promise<McpConnection | undefined> {
+  id: OpenAPIConnection["id"],
+): Promise<OpenAPIConnection | undefined> {
   const connectionDB = await db.connection.findFirst({
     where: { id },
   });
@@ -90,7 +90,7 @@ export async function getMyConnection(
   }
 
   const mcp = await importConnection(connectionDB.connectionID);
-  const config = JSON.parse(connectionDB.config) as McpConnection["config"];
+  const config = JSON.parse(connectionDB.config) as OpenAPIConnection["config"];
 
   return {
     mcp,
@@ -99,5 +99,5 @@ export async function getMyConnection(
     userDescription: connectionDB.userDescription,
     name: mcp.name,
     enabled: connectionDB.enable,
-  } as McpConnection;
+  } as OpenAPIConnection;
 }

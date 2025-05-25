@@ -17,7 +17,7 @@ export type Tool = Identifier & {
   arguments: ConfigArg[];
 };
 
-export type McpConnectionDefinition = Identifier & {
+export type OpenAPIConnectionDefinition = Identifier & {
   id: ID;
   configurationArguments: ConfigArg[];
   resources: Resource[];
@@ -29,9 +29,9 @@ export type Config = ConfigArg & {
   value: "string" | "number";
 };
 
-export type McpConnection = Identifier & {
+export type OpenAPIConnection = Identifier & {
   id: ID;
-  mcp: McpConnectionDefinition;
+  mcp: OpenAPIConnectionDefinition;
   config: Config[];
   enabled: boolean;
 };
