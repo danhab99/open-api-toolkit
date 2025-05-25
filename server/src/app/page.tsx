@@ -1,11 +1,12 @@
 import { Frame } from "@/components/Frame";
 import { ListMyConnections } from "@/components/ListMyConnections";
 import { Button } from "@/components/ui/button";
-import { getMyConnections } from "@/lib/connection";
+import { createConnectionsManager } from "@/lib/connection";
 import Link from "next/link";
 
 export default async function Home() {
-  const myConnections = await getMyConnections();
+  const c = await createConnectionsManager(__dirname);
+  const myConnections = await c.getMyConnections();
 
   return (
     <Frame

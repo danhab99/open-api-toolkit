@@ -1,5 +1,3 @@
-"use server";
-
 import path from "path";
 import {
   OpenAPIConnection,
@@ -8,93 +6,81 @@ import {
 import * as fs from "fs/promises";
 import { PrismaClient } from "open-api-db";
 
-// const CONNECTIONS_PATH: string = path.join(
-//   __dirname,
-//   "../../../../../connections",
-// );
-
-const cachedConnections: Record<
-  Parameters<ConnectionsManager["importConnection"]>[0],
-  Awaited<ReturnType<ConnectionsManager["importConnection"]>>
-> = {};
+const cachedConnections: Record<string, OpenAPIConnectionDefinition> = {};
 
 const db = new PrismaClient();
 
 const CONNECTIONS_PER_PAGE = 20;
 
-export class ConnectionsManager {
-  private root: string;
+export async function createConnectionsManager(root: string) {
+  return {
+    async listAvaliableConnections(): Promise<OpenAPIConnectionDefinition[]> {
+      const connectionDirs = await fs.readdir(root);
 
-  constructor(root: string) {
-    this.root = root;
-  }
+      const connetions: OpenAPIConnectionDefinition[] = await Promise.all(
+        connectionDirs.map(
+          (dir) =>
+            this.importConnection(dir) as Promise<OpenAPIConnectionDefinition>,
+        ),
+      );
 
-  async listAvaliableConnections(): Promise<OpenAPIConnectionDefinition[]> {
-    const connectionDirs = await fs.readdir(this.root);
+      return connetions;
+    },
 
-    const connetions: OpenAPIConnectionDefinition[] = await Promise.all(
-      connectionDirs.map(
-        (dir) =>
-          this.importConnection(dir) as Promise<OpenAPIConnectionDefinition>,
-      ),
-    );
+    async importConnection(
+      connectionName: string,
+    ): Promise<OpenAPIConnectionDefinition> {
+      if (connectionName in cachedConnections) {
+        return cachedConnections[connectionName];
+      }
 
-    return connetions;
-  }
+      const c: OpenAPIConnectionDefinition = await import(path.join(root));
 
-  async importConnection(
-    connectionName: string,
-  ): Promise<OpenAPIConnectionDefinition> {
-    if (connectionName in cachedConnections) {
-      return cachedConnections[connectionName];
-    }
+      cachedConnections[connectionName] = c;
+      return c;
+    },
 
-    const c: OpenAPIConnectionDefinition = await import(path.join(this.root));
+    async getMyConnection(id: number): Promise<OpenAPIConnection | undefined> {
+      const connectionDB = await db.connection.findFirst({
+        where: { id },
+      });
 
-    cachedConnections[connectionName] = c;
-    return c;
-  }
+      if (!connectionDB) {
+        return undefined;
+      }
 
-  async getMyConnection(id: number): Promise<OpenAPIConnection | undefined> {
-    const connectionDB = await db.connection.findFirst({
-      where: { id },
-    });
+      const mcp = await this.importConnection(connectionDB.connectionID);
+      const config = JSON.parse(
+        connectionDB.config,
+      ) as OpenAPIConnection["config"];
 
-    if (!connectionDB) {
-      return undefined;
-    }
+      return {
+        mcp,
+        config,
+        aiDescription: connectionDB.aiDescription,
+        userDescription: connectionDB.userDescription,
+        name: mcp.name,
+        enabled: connectionDB.enable,
+      } as OpenAPIConnection;
+    },
 
-    const mcp = await this.importConnection(connectionDB.connectionID);
-    const config = JSON.parse(
-      connectionDB.config,
-    ) as OpenAPIConnection["config"];
+    async getMyConnections(page: number = 0): Promise<OpenAPIConnection[]> {
+      const connectionDBs = await db.connection.findMany({
+        select: {
+          id: true,
+        },
+        orderBy: {
+          id: "asc",
+        },
+        skip: page * CONNECTIONS_PER_PAGE,
+        take: CONNECTIONS_PER_PAGE,
+      });
 
-    return {
-      mcp,
-      config,
-      aiDescription: connectionDB.aiDescription,
-      userDescription: connectionDB.userDescription,
-      name: mcp.name,
-      enabled: connectionDB.enable,
-    } as OpenAPIConnection;
-  }
-
-  async getMyConnections(page: number = 0): Promise<OpenAPIConnection[]> {
-    const connectionDBs = await db.connection.findMany({
-      select: {
-        id: true,
-      },
-      orderBy: {
-        id: "asc",
-      },
-      skip: page * CONNECTIONS_PER_PAGE,
-      take: CONNECTIONS_PER_PAGE,
-    });
-
-    return Promise.all(
-      connectionDBs.map(async ({ id }) => {
-        return this.getMyConnection(id) as Promise<OpenAPIConnection>;
-      }),
-    );
-  }
+      return Promise.all(
+        connectionDBs.map(async ({ id }) => {
+          return this.getMyConnection(id) as Promise<OpenAPIConnection>;
+        }),
+      );
+    },
+  };
 }

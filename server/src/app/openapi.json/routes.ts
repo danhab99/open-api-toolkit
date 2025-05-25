@@ -1,9 +1,11 @@
-import { listAvaliableConnections } from "@/lib/connection";
+import { createConnectionsManager } from "@/lib/connection";
 import { NextRequest, NextResponse } from "next/server";
 import { Callable } from "open-api-connector-types";
 
+
 export async function GET(req: NextRequest) {
-  const connections = await listAvaliableConnections();
+  const c = await createConnectionsManager(__dirname);
+  const connections = await c.listAvaliableConnections();
 
   const paths: Record<string, any> = {};
 
