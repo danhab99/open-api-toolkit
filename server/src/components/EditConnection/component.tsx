@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { Config, McpConnection } from "../../types";
 import { ConfigInput } from "../ConfigInput";
