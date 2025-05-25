@@ -1,4 +1,4 @@
-import { McpConnection, McpConnectionDefinition } from "./types";
+import { McpConnection, McpConnectionDefinition } from "open-api-connector-types";
 
 export const exampleMcpConnection: McpConnection = {
   name: "Example Connection",

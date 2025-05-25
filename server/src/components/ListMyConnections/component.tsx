@@ -1,5 +1,5 @@
 import React from "react";
-import { McpConnection } from "../../types";
+import { McpConnection } from "open-api-connector-types";
 import { Grid } from "../Grid";
 import { ConnectionCard } from "../ConnectionCard";
 

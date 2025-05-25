@@ -1,7 +1,7 @@
 "use server";
 
 import path from "path";
-import { McpConnection, McpConnectionDefinition } from "../types.js";
+import { McpConnection, McpConnectionDefinition } from "open-api-connector-types";
 import * as fs from "fs/promises";
 import { PrismaClient } from "../../lib/generated/prisma/index.js";
 

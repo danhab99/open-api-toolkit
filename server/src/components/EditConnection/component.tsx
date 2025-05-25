@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Config, McpConnection } from "../../types";
+import { Config, McpConnection } from "open-api-connector-types";
 import { ConfigInput } from "../ConfigInput";
 import { Button } from "../ui/button";
 

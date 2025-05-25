@@ -1,6 +1,6 @@
 import React from "react";
 import { Label } from "../ui/label";
-import { Config } from "../../types";
+import { Config } from "open-api-connector-types";
 import { Input } from "../ui/input";
 
 export type ConfigInputProps = {
