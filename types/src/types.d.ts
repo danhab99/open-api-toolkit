@@ -8,9 +8,11 @@ export type ConfigArg = Identifier & {
   type: "string" | "number";
 };
 
+export type KVP = Record<string, any>;
+
 export type Tool = Identifier & {
   arguments: ConfigArg[];
-  handler: (args: Record<string, any>) => Promise<Record<string, any>>;
+  handler: (config: KVP, args: KVP) => Promise<KVP>;
 };
 
 export type OpenAPIConnectionDefinition = Identifier & {

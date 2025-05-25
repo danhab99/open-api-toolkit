@@ -1,5 +1,6 @@
 import { getMyConnection, importConnection } from "@/lib/connection";
 import { NextRequest, NextResponse } from "next/server";
+import { KVP } from "open-api-connector-types";
 
 export async function POST(req: NextRequest) {
   const url = new URL(req.url);
@@ -26,7 +27,15 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  const results = await tool.handler(url.searchParams);
+  const config: KVP = connectionInfo.config.reduce(
+    (configObj, c) => ({
+      ...configObj,
+      [c.name]: c.value,
+    }),
+    {},
+  );
+
+  const results = await tool.handler(config, url.searchParams);
 
   return new NextResponse(JSON.stringify(results), {
     status: 200,
