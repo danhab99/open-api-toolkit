@@ -1,11 +1,10 @@
 import { Frame } from "@/components/Frame";
 import { ListAvaliableConnections } from "@/components/ListAvaliableConnections";
-import { createConnectionsManager } from "@/lib/connection";
+import { listAvaliableConnections } from "@/lib/connection";
 
 
 export default async function NewPage() {
-  const c = await createConnectionsManager(__dirname);
-  const mcpDefs = await c.listAvaliableConnections();
+  const mcpDefs = await listAvaliableConnections(__dirname);
 
   return (
     <Frame>
