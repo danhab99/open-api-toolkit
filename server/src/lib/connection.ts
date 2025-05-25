@@ -5,7 +5,7 @@ import { McpConnection, McpConnectionDefinition } from "open-api-connector-types
 import * as fs from "fs/promises";
 import { PrismaClient } from "../../lib/generated/prisma/index.js";
 
-const CONNECTIONS_PATH: string = "";
+const CONNECTIONS_PATH: string = path.join(__dirname, "../../../../../connections");
 
 export async function listAvaliableConnections(): Promise<
   McpConnectionDefinition[]
