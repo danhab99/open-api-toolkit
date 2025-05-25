@@ -8,17 +8,13 @@ export type ConfigArg = Identifier & {
   type: "string" | "number";
 };
 
-export type Callable = Identifier & {
+export type Tool = Identifier & {
   arguments: ConfigArg[];
-  handler: (args: Record<string, any>) => void;
+  handler: (args: Record<string, any>) => Promise<Record<string, any>>;
 };
-
-export type Resource = Callable;
-export type Tool = Callable;
 
 export type OpenAPIConnectionDefinition = Identifier & {
   configurationArguments: ConfigArg[];
-  resources: Resource[];
   tools: Tool[];
 };
 
