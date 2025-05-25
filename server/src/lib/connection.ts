@@ -1,11 +1,17 @@
 "use server";
 
 import path from "path";
-import { OpenAPIConnection, OpenAPIConnectionDefinition } from "open-api-connector-types";
+import {
+  OpenAPIConnection,
+  OpenAPIConnectionDefinition,
+} from "open-api-connector-types";
 import * as fs from "fs/promises";
 import { PrismaClient } from "open-api-db";
 
-const CONNECTIONS_PATH: string = path.join(__dirname, "../../../../../connections");
+const CONNECTIONS_PATH: string = path.join(
+  __dirname,
+  "../../../../../connections",
+);
 
 export async function listAvaliableConnections(): Promise<
   OpenAPIConnectionDefinition[]
@@ -14,22 +20,11 @@ export async function listAvaliableConnections(): Promise<
 
   const connetions: OpenAPIConnectionDefinition[] = await Promise.all(
     connectionDirs.map(
-      (dir) =>
-        importConnectionFile(
-          dir,
-          "manifest.json",
-        ) as Promise<OpenAPIConnectionDefinition>,
+      (dir) => importConnection(dir) as Promise<OpenAPIConnectionDefinition>,
     ),
   );
 
   return connetions;
-}
-
-async function importConnectionFile(
-  connectionName: string,
-  file: string,
-): Promise<Partial<OpenAPIConnectionDefinition>> {
-  return require(path.join(CONNECTIONS_PATH, connectionName, file));
 }
 
 const cachedConnections: Record<
@@ -44,10 +39,9 @@ export async function importConnection(
     return cachedConnections[connectionName];
   }
 
-  const c = {
-    ...(await importConnectionFile(connectionName, "manifest.json")),
-    ...(await importConnectionFile(connectionName, "index.js")),
-  } as OpenAPIConnectionDefinition;
+  const c: OpenAPIConnectionDefinition = await import(
+    path.join(CONNECTIONS_PATH, connectionName)
+  );
 
   cachedConnections[connectionName] = c;
   return c;
