@@ -1,12 +1,21 @@
+import { Frame } from "@/components/Frame";
 import { ListMyConnections } from "@/components/ListMyConnections";
-import { useMyConnections } from "@/hooks/connections";
+import { Button } from "@/components/ui/button";
+import { getMyConnections } from "@/lib/connection";
+import Link from "next/link";
 
-export default function Home() {
-  const myConnections = useMyConnections();
+export default async function Home() {
+  const myConnections = await getMyConnections();
 
   return (
-    <main>
+    <Frame
+      header={
+        <Link href={"/new"}>
+          <Button>Add new</Button>
+        </Link>
+      }
+    >
       <ListMyConnections mcps={myConnections} />
-    </main>
+    </Frame>
   );
 }
