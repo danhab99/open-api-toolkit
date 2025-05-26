@@ -1,4 +1,5 @@
-import { PrismaClient } from "@prisma/client/extension";
+import { PrismaClient } from "../lib/generated/prisma";
 
-export { PrismaClient };
-export const db = new PrismaClient();
+const db = new PrismaClient();
+
+export { db, PrismaClient };
