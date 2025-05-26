@@ -4,3 +4,4 @@ server/node_modules
 server/prisma/db
 **/node_modules
 prisma/lib/generated/prisma
+db

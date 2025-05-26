@@ -59,7 +59,7 @@
     "tailwind-merge": "^3.3.0",
     "tailwindcss-animate": "^1.0.7",
     "open-api-connector-types": "link:../types",
-    "open-api-db": "link:../prisma",
+    "open-api-db": "file:../prisma",
     "vaul": "^1.1.2",
     "zod": "^3.25.22"
   },

@@ -1,9 +1,0 @@
-{
-  "private": true,
-  "workspaces": [
-    "server",
-    "types",
-    "prisma",
-    "connections/*"
-  ]
-}
