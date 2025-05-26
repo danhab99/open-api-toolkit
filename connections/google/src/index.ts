@@ -1,24 +1,16 @@
 import { OpenAPIConnectionDefinition } from "open-api-connection-types";
 
-export default {
-  name: "Google",
-  userDescription: "This connects you to google",
-  aiDescription: "TODO come up with an ai description",
-
+export const googleCalendarConnection: OpenAPIConnectionDefinition = {
+  name: "Google Calendar",
+  userDescription: "Connects to Google Calendar using a service account",
+  aiDescription: "Allows tools to manage events in a Google Calendar via the API",
   configurationArguments: [
     {
-      aiDescription: "",
-      userDescription: "The credentials.json file content",
-      name: "credentials.jsn",
+      name: "serviceAccountJson",
+      userDescription: "Service Account JSON",
+      aiDescription: "The Google service account credentials as a JSON string",
       type: "string",
     },
   ],
-
-  resources: [{
-    arguments:[
-      {
-
-      }
-    ]
-  }],
+  tools: [createGoogleCalendarEventTool],
 } as OpenAPIConnectionDefinition;
