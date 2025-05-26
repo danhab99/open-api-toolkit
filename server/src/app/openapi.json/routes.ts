@@ -2,7 +2,7 @@ import { listAvaliableConnections } from "@/lib/connection";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const connections = await listAvaliableConnections(__dirname);
+  const connections = await listAvaliableConnections();
 
   const paths: Record<string, any> = {};
 

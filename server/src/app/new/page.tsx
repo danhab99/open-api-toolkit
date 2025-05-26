@@ -4,7 +4,7 @@ import { listAvaliableConnections } from "@/lib/connection";
 
 
 export default async function NewPage() {
-  const mcpDefs = await listAvaliableConnections(__dirname);
+  const mcpDefs = await listAvaliableConnections();
 
   return (
     <Frame>

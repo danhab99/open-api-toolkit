@@ -5,7 +5,7 @@ import { getMyConnections } from "@/lib/connection";
 import Link from "next/link";
 
 export default async function Home() {
-  const myConnections = await getMyConnections(__dirname);
+  const myConnections = await getMyConnections();
 
   return (
     <Frame

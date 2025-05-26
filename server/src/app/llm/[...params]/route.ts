@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
 
   const [, connectionID, , toolName] = url.pathname.split("/");
 
-  const connectionInfo = await getMyConnection(__dirname, {
+  const connectionInfo = await getMyConnection({
     connectionID,
   });
 
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  const connection = await importConnection(__dirname, connectionInfo.mcp.name);
+  const connection = await importConnection(connectionInfo.mcp.name);
 
   const tool = connection.tools.find((t) => t.name === toolName);
 
