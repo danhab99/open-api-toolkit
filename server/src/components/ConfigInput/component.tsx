@@ -11,7 +11,12 @@ export type ConfigInputProps = {
 export function ConfigInput(props: ConfigInputProps) {
   return (
     <div>
-      <Label>{props.config.name}</Label>
+      <p>
+        <Label>{props.config.name}</Label>
+      </p>
+      <p>
+        <Label>{props.config.userDescription}</Label>
+      </p>
       <Input
         type={props.config.type}
         onChange={(e) => props.onConfigChange(e.target.value)}

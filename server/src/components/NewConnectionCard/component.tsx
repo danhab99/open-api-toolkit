@@ -8,10 +8,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { OpenAPIConnectionDefinition } from "open-api-connector-types";
+import Link from "next/link";
+import { OpenAPIConnectionDefinitionWithSlug } from "@/lib/connection";
 
 export type NewConnectionCardProps = {
-  mcpDef: OpenAPIConnectionDefinition;
+  mcpDef: OpenAPIConnectionDefinitionWithSlug;
 };
 
 export function NewConnectionCard(props: NewConnectionCardProps) {
@@ -23,7 +24,9 @@ export function NewConnectionCard(props: NewConnectionCardProps) {
           <CardDescription>{props.mcpDef.userDescription}</CardDescription>
         </CardHeader>
         <CardFooter className="flex justify-end gap-4">
-          <Button>Create</Button>
+          <Link href={`/new/${props.mcpDef.slug}`}>
+            <Button>Create</Button>
+          </Link>
         </CardFooter>
       </Card>
     </>

@@ -30,7 +30,7 @@
             PRISMA_SCHEMA_ENGINE_BINARY =
               "${pkgs.prisma-engines}/bin/schema-engine";
 
-            DATABASE_PATH="file:./db";
+            DATABASE_PATH="file:/home/dan/Documents/node/mcp-server/db";
 
             shellHook = ''
             zsh

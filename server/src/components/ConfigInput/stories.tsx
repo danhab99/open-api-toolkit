@@ -24,10 +24,8 @@ type Story = StoryObj<typeof meta>;
 // };
 
 export const Test: Story = {
-  argTypes: {
-    config: {
-      defaultValue: exampleOpenAPIConnection.config[0],
-    },
+  args: {
+    config: exampleOpenAPIConnection.configurationArguments[0],
     onConfigChange: fn(),
   },
 };

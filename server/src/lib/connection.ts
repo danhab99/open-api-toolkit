@@ -4,42 +4,41 @@ import {
 } from "open-api-connector-types";
 import { db } from "open-api-db";
 import { Prisma } from "open-api-db/lib/generated/prisma/client";
-
 import { Connection as GoogleConnection } from "@open-api-connection/google";
-import getConfig from "next/config";
 
 const CONNECTIONS_PER_PAGE = 20;
 
-const Connections: OpenAPIConnectionDefinition[] = [GoogleConnection];
-
-export async function listAvaliableConnections(): Promise<
-  OpenAPIConnectionDefinition[]
-> {
-  return Connections;
+function slugify(str: string): string {
+  return str
+    .toLowerCase()
+    .trim()
+    .normalize("NFD") // split accented characters into base + diacritics
+    .replace(/[\u0300-\u036f]/g, "") // remove diacritics
+    .replace(/[^a-z0-9]+/g, "-") // replace non-alphanumeric with hyphens
+    .replace(/^-+|-+$/g, ""); // remove leading/trailing hyphens
 }
 
-var cachedConnections: Record<string, OpenAPIConnectionDefinition> = {};
+export type OpenAPIConnectionDefinitionWithSlug =
+  OpenAPIConnectionDefinition & {
+    slug: string;
+  };
 
-export async function importConnections() {
-  const {
-    publicRuntimeConfig: { connectionPackages },
-  } = getConfig()
+export const Connections: OpenAPIConnectionDefinitionWithSlug[] = [
+  GoogleConnection,
+].map((x) => ({
+  ...x,
+  slug: slugify(x.name),
+}));
 
-  for (const pkg of connectionPackages as string[]) {
-    // each package exports one thing named `shared`
-    const mod = await import(pkg)
-    cachedConnections[pkg] = mod.Connection as OpenAPIConnectionDefinition
-  }
-
-  return cachedConnections
-}
-
-export async function importConnection(
-  connectionName: string,
-): Promise<OpenAPIConnectionDefinition> {
-  const x = Connections.find((x) => x.name === connectionName);
-  if (x) return x;
-  else throw "connection not found";
+export function importConnection(slug: string) {
+  console.log("Connection", {
+    Connections,
+    slug,
+    res: Connections.find((x) => x.slug === slug),
+  });
+  const x = Connections.find((x) => x.slug === slug);
+  if (!x) throw "no connection found";
+  return x;
 }
 
 export async function getMyConnection(
@@ -53,7 +52,7 @@ export async function getMyConnection(
     return undefined;
   }
 
-  const mcp = await importConnection(connectionDB.connectionID);
+  const mcp = importConnection(connectionDB.connectionID);
   const config = JSON.parse(connectionDB.config) as OpenAPIConnection["config"];
 
   return {
