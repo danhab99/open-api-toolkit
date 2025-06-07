@@ -5,9 +5,12 @@ import {
 import { db } from "open-api-db";
 import { Prisma } from "open-api-db/lib/generated/prisma/client";
 
+import { Connection as GoogleConnection } from "@open-api-connection/google";
+import getConfig from "next/config";
+
 const CONNECTIONS_PER_PAGE = 20;
 
-var Connections: OpenAPIConnectionDefinition[] = [];
+const Connections: OpenAPIConnectionDefinition[] = [GoogleConnection];
 
 export async function listAvaliableConnections(): Promise<
   OpenAPIConnectionDefinition[]
@@ -15,16 +18,20 @@ export async function listAvaliableConnections(): Promise<
   return Connections;
 }
 
+var cachedConnections: Record<string, OpenAPIConnectionDefinition> = {};
+
 export async function importConnections() {
-  if (Connections.length > 0) {
-    return Connections;
+  const {
+    publicRuntimeConfig: { connectionPackages },
+  } = getConfig()
+
+  for (const pkg of connectionPackages as string[]) {
+    // each package exports one thing named `shared`
+    const mod = await import(pkg)
+    cachedConnections[pkg] = mod.Connection as OpenAPIConnectionDefinition
   }
 
-  Connections = (await Promise.all([
-    await import("../../../connections/google"),
-  ])) as unknown as OpenAPIConnectionDefinition[];
-
-  return Connections;
+  return cachedConnections
 }
 
 export async function importConnection(

@@ -1,7 +1,11 @@
-import type { NextConfig } from "next";
+const withTM = require("next-transpile-modules")([
+  "@open-api-connection/google",
+  // Add all local file: packages here
+]);
 
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  transpilePackages: ["@open-api-connection/google"],
 };
 
-export default nextConfig;
+module.exports = withTM(nextConfig);
