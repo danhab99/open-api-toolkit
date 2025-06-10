@@ -22,12 +22,7 @@ export async function importConnection(id: string) {
   const x = Connections.find((x) => x.id === id);
   if (!x) throw "no connection found";
 
-  // Strip function fields
-  const serializable = Object.fromEntries(
-    Object.entries(x).filter(([_, v]) => typeof v !== "function"),
-  );
-
-  return serializable;
+  return JSON.parse(JSON.stringify(x));
 }
 
 export async function getTools(id: string) {
