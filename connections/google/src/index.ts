@@ -2,6 +2,7 @@ import { OpenAPIConnectionDefinition } from "open-api-connection-types";
 import { createGoogleCalendarEventTool } from "./calendar";
 
 export const Connection: OpenAPIConnectionDefinition = {
+  id: "google_calendar",
   name: "Google Calendar",
   userDescription: "Connects to Google Calendar using a service account",
   aiDescription:
@@ -14,5 +15,6 @@ export const Connection: OpenAPIConnectionDefinition = {
       type: "string",
     },
   ],
-  tools: [createGoogleCalendarEventTool],
 } as OpenAPIConnectionDefinition;
+
+export const Tools = [createGoogleCalendarEventTool];
