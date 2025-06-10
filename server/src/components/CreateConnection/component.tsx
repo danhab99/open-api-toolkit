@@ -18,7 +18,6 @@ export function CreateConnection(props: CreateConnectionProps) {
   const router = useRouter();
 
   const add = async () => {
-    debugger
     await createConnection({
       config: config,
       def: props.connectionDef,
@@ -28,6 +27,10 @@ export function CreateConnection(props: CreateConnectionProps) {
       userDescription: "",
     });
     router.push("/");
+  };
+
+  const handleBack = () => {
+    router.back();
   };
 
   return (
@@ -53,7 +56,9 @@ export function CreateConnection(props: CreateConnectionProps) {
 
       <div className="flex flex-row gap-2 py-2">
         <Button onClick={add}>Add</Button>
-        <Button variant="outline">Cancel</Button>
+        <Button onClick={handleBack} variant="outline">
+          Cancel
+        </Button>
       </div>
     </>
   );
