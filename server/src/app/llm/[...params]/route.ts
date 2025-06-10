@@ -1,4 +1,4 @@
-import { getMyConnection, importConnection } from "@/lib/connection";
+import { getMyConnection, getTools } from "@/lib/connection";
 import { NextRequest, NextResponse } from "next/server";
 import { KVP } from "open-api-connector-types";
 
@@ -10,17 +10,14 @@ export async function POST(req: NextRequest) {
   const connectionInfo = await getMyConnection({
     connectionID,
   });
-
   if (!connectionInfo) {
     return new NextResponse("connection not found", {
       status: 404,
     });
   }
 
-  const connection = await importConnection(connectionInfo.mcp.name);
-
-  const tool = connection.tools.find((t) => t.name === toolName);
-
+  const tools = await getTools(connectionID);
+  const tool = tools.find((t) => t.name === toolName);
   if (!tool) {
     return new NextResponse("tool not found", {
       status: 404,
