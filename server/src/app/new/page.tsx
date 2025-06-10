@@ -3,7 +3,7 @@ import { ListAvaliableConnections } from "@/components/ListAvaliableConnections"
 
 export default async function NewPage() {
   return (
-    <Frame>
+    <Frame title="create connection">
       <ListAvaliableConnections />
     </Frame>
   );
