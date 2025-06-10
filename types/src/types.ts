@@ -4,29 +4,34 @@ export type Identifier = {
   aiDescription: string;
 };
 
-export type ConfigArg = Identifier & {
+export type ConfigDef = Identifier & {
   type: "string" | "number";
 };
 
 export type KVP = Record<string, any>;
 
 export type Tool = Identifier & {
-  arguments: ConfigArg[];
+  arguments: ConfigDef[];
   handler: (config: KVP, args: KVP) => Promise<KVP>;
 };
 
 export type OpenAPIConnectionDefinition = Identifier & {
-  configurationArguments: ConfigArg[];
-  tools: Tool[];
+  id: string;
+  configurationArguments: ConfigDef[];
 };
 
-export type Config = ConfigArg & {
-  configId: ConfigArg["id"];
-  value: "string" | "number";
+export type Config = ConfigDef & {
+  configId: string;
+  value: string | number;
 };
 
 export type OpenAPIConnection = Identifier & {
-  mcp: OpenAPIConnectionDefinition;
+  def: OpenAPIConnectionDefinition;
   config: Config[];
   enabled: boolean;
 };
+
+export type ConfigurationSet<T extends Array<ConfigDef>> = Record<
+  T[number]["name"],
+  string | number
+>;

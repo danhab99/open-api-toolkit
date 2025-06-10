@@ -1,44 +1,41 @@
+"use server";
 import {
   OpenAPIConnection,
   OpenAPIConnectionDefinition,
 } from "open-api-connector-types";
 import { db } from "open-api-db";
 import { Prisma } from "open-api-db/lib/generated/prisma/client";
-import { Connection as GoogleConnection } from "@open-api-connection/google";
+import { Connection as GoogleConnection, Tools as GoogleTools } from "@open-api-connection/google";
 
 const CONNECTIONS_PER_PAGE = 20;
 
-function slugify(str: string): string {
-  return str
-    .toLowerCase()
-    .trim()
-    .normalize("NFD") // split accented characters into base + diacritics
-    .replace(/[\u0300-\u036f]/g, "") // remove diacritics
-    .replace(/[^a-z0-9]+/g, "-") // replace non-alphanumeric with hyphens
-    .replace(/^-+|-+$/g, ""); // remove leading/trailing hyphens
+export async function getAllConnections() {
+  const Connections: OpenAPIConnectionDefinition[] = [
+    GoogleConnection,
+  ];
+
+  return Connections;
 }
 
-export type OpenAPIConnectionDefinitionWithSlug =
-  OpenAPIConnectionDefinition & {
-    slug: string;
+export async function importConnection(id: string) {
+  const Connections = await getAllConnections();
+  const x = Connections.find((x) => x.id === id);
+  if (!x) throw "no connection found";
+
+  // Strip function fields
+  const serializable = Object.fromEntries(
+    Object.entries(x).filter(([_, v]) => typeof v !== "function"),
+  );
+
+  return serializable;
+}
+
+export async function getTools(id: string) {
+  const Tools = {
+    [GoogleConnection.id]: GoogleTools
   };
 
-export const Connections: OpenAPIConnectionDefinitionWithSlug[] = [
-  GoogleConnection,
-].map((x) => ({
-  ...x,
-  slug: slugify(x.name),
-}));
-
-export function importConnection(slug: string) {
-  console.log("Connection", {
-    Connections,
-    slug,
-    res: Connections.find((x) => x.slug === slug),
-  });
-  const x = Connections.find((x) => x.slug === slug);
-  if (!x) throw "no connection found";
-  return x;
+  return Tools[id];
 }
 
 export async function getMyConnection(
@@ -52,15 +49,15 @@ export async function getMyConnection(
     return undefined;
   }
 
-  const mcp = importConnection(connectionDB.connectionID);
+  const def = await importConnection(connectionDB.connectionID);
   const config = JSON.parse(connectionDB.config) as OpenAPIConnection["config"];
 
   return {
-    mcp,
+    def,
     config,
     aiDescription: connectionDB.aiDescription,
     userDescription: connectionDB.userDescription,
-    name: mcp.name,
+    name: def.name,
     enabled: connectionDB.enable,
   } as OpenAPIConnection;
 }
@@ -86,4 +83,21 @@ export async function getMyConnections(
       }) as Promise<OpenAPIConnection>;
     }),
   );
+}
+
+export async function createConnection(conn: OpenAPIConnection) {
+  const res = await db.connection.create({
+    data: {
+      aiDescription: conn.aiDescription,
+      connectionID: conn.def.id,
+      config: JSON.stringify(conn.config),
+      enable: true,
+      userDescription: conn.userDescription,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  return res.id;
 }

@@ -1,11 +1,12 @@
 import React from "react";
 import { Label } from "../ui/label";
-import { Config } from "open-api-connector-types";
+import { Config, ConfigDef } from "open-api-connector-types";
 import { Input } from "../ui/input";
 
 export type ConfigInputProps = {
-  config: Config;
+  config: ConfigDef;
   onConfigChange: (c: Config["type"]) => void;
+  value: Config["type"];
 };
 
 export function ConfigInput(props: ConfigInputProps) {
@@ -19,7 +20,7 @@ export function ConfigInput(props: ConfigInputProps) {
       </p>
       <Input
         type={props.config.type}
-        onChange={(e) => props.onConfigChange(e.target.value)}
+        onChange={(e) => props.onConfigChange(e.target.value as any)}
       />
     </div>
   );

@@ -1,23 +1,30 @@
-import { ConfigInput } from "@/components/ConfigInput";
-import { importConnection, Connections } from "@/lib/connection";
+"use server";
+import {
+  getAllConnections,
+  importConnection,
+} from "@/lib/connection";
+import { Frame } from "@/components/Frame";
+import { CreateConnection } from "@/components/CreateConnection";
 
 type PageProps = {
   connectionName: string;
 };
 
-export default async function Page(p: Promise<PageProps>) {
-  const props = await p;
-  const connection = importConnection(props.connectionName);
+export default async function Page({ params }: Promise<PageProps>) {
+  const props = await params;
+  const connection = await importConnection(props.connectionName);
 
   return (
-    <div>
-      {connection.configurationArguments.map((arg, i) => (
-        <ConfigInput key={i} config={arg} />
-      ))}
-    </div>
+    <Frame>
+      <hr />
+      <h1 className="text-2xl py-2">{connection.name}</h1>
+      <p className="text-gray-500 pb-4">{connection.userDescription}</p>
+      <CreateConnection connectionDef={connection} />
+    </Frame>
   );
 }
 
 export async function generateStaticParams() {
-  return Connections.map((slug) => ({ slug }));
+  const c = await getAllConnections();
+  return c.map((slug) => ({ slug }));
 }
