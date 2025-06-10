@@ -5,14 +5,15 @@ import {
 } from "open-api-connector-types";
 import { db } from "open-api-db";
 import { Prisma } from "open-api-db/lib/generated/prisma/client";
-import { Connection as GoogleConnection, Tools as GoogleTools } from "@open-api-connection/google";
+import {
+  Connection as GoogleConnection,
+  Tools as GoogleTools,
+} from "@open-api-connection/google";
 
 const CONNECTIONS_PER_PAGE = 20;
 
 export async function getAllConnections() {
-  const Connections: OpenAPIConnectionDefinition[] = [
-    GoogleConnection,
-  ];
+  const Connections: OpenAPIConnectionDefinition[] = [GoogleConnection];
 
   return Connections;
 }
@@ -27,7 +28,7 @@ export async function importConnection(id: string) {
 
 export async function getTools(id: string) {
   const Tools = {
-    [GoogleConnection.id]: GoogleTools
+    [GoogleConnection.id]: GoogleTools,
   };
 
   return Tools[id];
@@ -95,4 +96,28 @@ export async function createConnection(conn: OpenAPIConnection) {
   });
 
   return res.id;
+}
+
+export async function enableConnection(connectionID: string, enable: boolean) {
+  const r = await db.connection.findFirst({
+    where: {
+      connectionID,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (!r) {
+    throw "cannot find connection";
+  }
+
+  await db.connection.update({
+    data: {
+      enable,
+    },
+    where: {
+      id: r.id,
+    },
+  });
 }
