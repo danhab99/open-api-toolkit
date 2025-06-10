@@ -1,8 +1,9 @@
-import { listAvaliableConnections } from "@/lib/connection";
+"use server";
+import { getMyConnections, getTools } from "@/lib/connection";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const connections = await listAvaliableConnections();
+  const connections = await getMyConnections();
 
   const paths: Record<string, any> = {};
 
@@ -11,12 +12,14 @@ export async function GET() {
       summary: connection.aiDescription,
     };
 
-    for (const r of connection.tools) {
+    const tools = await getTools(connection.def.id)
+
+    for (const r of tools) {
       paths[`/llm/${connection.name}/tool/${r.name}`] = {
         post: {
           parameters: r.arguments.map((arg) => ({
             name: arg.name,
-            descriptin: arg.aiDescription,
+            description: arg.aiDescription,
             in: "query",
             schema: {
               type: arg.type,
