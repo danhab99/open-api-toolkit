@@ -1,15 +1,18 @@
+"use server";
 import React from "react";
-import { OpenAPIConnectionDefinition } from "open-api-connector-types";
 import { NewConnectionCard } from "../NewConnectionCard";
 import { Grid } from "../Grid";
-import { Connections } from "../../lib/connection";
+import { getAllConnections } from "../../lib/connection";
 
 export type ListAvaliableConnectionsProps = {};
 
-export function ListAvaliableConnections(props: ListAvaliableConnectionsProps) {
+export async function ListAvaliableConnections(
+  props: ListAvaliableConnectionsProps,
+) {
+  const connections = await getAllConnections();
   return (
     <Grid>
-      {Connections.map((def, i) => (
+      {connections.map((def, i) => (
         <NewConnectionCard mcpDef={def} key={i} />
       ))}
     </Grid>
