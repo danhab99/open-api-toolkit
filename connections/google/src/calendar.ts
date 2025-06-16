@@ -1,13 +1,11 @@
-import { google } from "googleapis";
-import { JWT } from "google-auth-library";
 import { Tool } from "open-api-connection-types";
+import { getCalendar } from "./lib";
 
 export const createGoogleCalendarEventTool: Tool = {
   name: "Create Google Calendar Event",
   userDescription:
     "Creates an event in a Google Calendar using a service account",
-  aiDescription:
-    "Use this tool to create calendar events",
+  aiDescription: "Use this tool to create calendar events",
   arguments: [
     {
       name: "calendarId",
@@ -41,22 +39,7 @@ export const createGoogleCalendarEventTool: Tool = {
     },
   ],
   handler: async (config, args) => {
-    const serviceAccountJson = config["serviceAccountJson"];
-    if (!serviceAccountJson)
-      throw new Error("Missing serviceAccountJson in config");
-
-    const credentials =
-      typeof serviceAccountJson === "string"
-        ? JSON.parse(serviceAccountJson)
-        : serviceAccountJson;
-
-    const auth = new google.auth.JWT({
-      email: credentials.client_email,
-      key: credentials.private_key,
-      scopes: ["https://www.googleapis.com/auth/calendar"],
-    });
-
-    const calendar = google.calendar({ version: "v3", auth });
+    const calendar = getCalendar(config);
 
     const response = await calendar.events.insert({
       calendarId: args["calendarId"],
@@ -68,6 +51,8 @@ export const createGoogleCalendarEventTool: Tool = {
       },
     });
 
-    return { eventId: response.data.id, status: response.status };
+    return {
+      results: { eventId: response.data.id, status: response.status },
+    };
   },
 } as Tool;
