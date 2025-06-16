@@ -105,7 +105,7 @@ export async function createConnection(conn: OpenAPIConnection) {
 }
 
 export async function enableConnection(connectionID: string, enable: boolean) {
-  const r = await db.connection.findFirst({
+  const r = await db.connection.findFirstOrThrow({
     where: {
       connectionID,
     },
@@ -125,5 +125,19 @@ export async function enableConnection(connectionID: string, enable: boolean) {
     where: {
       id: r.id,
     },
+  });
+}
+
+export async function deleteConnection(connectionID: string) {
+  const r = await db.connection.findFirstOrThrow({
+    where: {
+      connectionID,
+    },
+    select: {
+      id: true,
+    },
+  });
+  await db.connection.delete({
+    where: { id: r!.id },
   });
 }

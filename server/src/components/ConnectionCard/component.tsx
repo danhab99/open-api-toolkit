@@ -13,7 +13,8 @@ import {
 import { OpenAPIConnection } from "open-api-connector-types";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableBody, TableCell, TableRow } from "../ui/table";
-import { enableConnection } from "@/lib/connection";
+import { enableConnection, deleteConnection } from "@/lib/connection";
+import { useRouter } from "next/navigation";
 
 export type ConnectionCardProps = {
   enable: boolean;
@@ -22,6 +23,7 @@ export type ConnectionCardProps = {
 
 export function ConnectionCard(props: ConnectionCardProps) {
   const [enable, setEnable] = React.useState(props.enable);
+  const router = useRouter();
 
   return (
     <Card>
@@ -51,7 +53,15 @@ export function ConnectionCard(props: ConnectionCardProps) {
         </Table>
       </CardContent>
       <CardFooter className="flex justify-end gap-4">
-        <Button variant="outline">Delete</Button>
+        <Button
+          variant="outline"
+          onClick={async () => {
+            await deleteConnection(props.mcp.slug);
+            router.refresh();
+          }}
+        >
+          Delete
+        </Button>
         <Button>Edit</Button>
       </CardFooter>
     </Card>

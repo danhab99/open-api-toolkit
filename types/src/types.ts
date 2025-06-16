@@ -34,6 +34,8 @@ export type Config = ConfigDef & {
 };
 
 export type OpenAPIConnection = Identifier & {
+  id: number;
+  slug: string;
   def: OpenAPIConnectionDefinition;
   config: Config[];
   enabled: boolean;
