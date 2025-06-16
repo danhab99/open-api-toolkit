@@ -1,27 +1,24 @@
-import React from "react";
+import React, { useId } from "react";
 import { Label } from "../ui/label";
-import { Config, ConfigDef } from "open-api-connector-types";
+import { ConfigDef } from "open-api-connector-types";
 import { Input } from "../ui/input";
 
 export type ConfigInputProps = {
   config: ConfigDef;
-  onConfigChange: (c: Config["type"]) => void;
-  value: Config["type"];
 };
 
 export function ConfigInput(props: ConfigInputProps) {
+  const id = useId();
+
   return (
     <div>
       <p>
-        <Label>{props.config.name}</Label>
+        <Label htmlFor={id}>{props.config.name}</Label>
       </p>
       <p>
-        <Label>{props.config.userDescription}</Label>
+        <Label htmlFor={id}>{props.config.userDescription}</Label>
       </p>
-      <Input
-        type={props.config.type}
-        onChange={(e) => props.onConfigChange(e.target.value as any)}
-      />
+      <Input id={id} type={props.config.type} name={props.config.name} />
     </div>
   );
 }

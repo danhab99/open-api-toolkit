@@ -13,7 +13,7 @@ export async function ListAvaliableConnections(
   return (
     <Grid>
       {connections.map((def, i) => (
-        <NewConnectionCard mcpDef={def} key={i} />
+        <NewConnectionCard connection={def} key={i} />
       ))}
     </Grid>
   );
