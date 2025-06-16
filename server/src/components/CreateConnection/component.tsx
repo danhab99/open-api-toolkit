@@ -25,12 +25,14 @@ export function CreateConnection(props: CreateConnectionProps) {
     );
 
     await createConnection({
+      id: 0,
+      slug: "",
       config: config,
       def: props.connectionDef,
       enabled: true,
-      aiDescription: "",
-      name: "",
-      userDescription: "",
+      aiDescription: data.get("Prompt")?.toString() ?? "",
+      name: data.get("Name")?.toString() ?? `${props.connectionDef.name}`,
+      userDescription: data.get("Description")?.toString() ?? "",
     });
     router.push("/");
   };
@@ -42,6 +44,35 @@ export function CreateConnection(props: CreateConnectionProps) {
   return (
     <>
       <Form action={add}>
+        <ConfigInput
+          config={{
+            name: "Name",
+            type: "string",
+            aiDescription: "",
+            userDescription: "",
+          }}
+        />
+
+        <ConfigInput
+          config={{
+            name: "Description",
+            type: "string",
+            aiDescription: "",
+            userDescription: "",
+          }}
+        />
+
+        <ConfigInput
+          config={{
+            name: "Prompt",
+            type: "string",
+            aiDescription: "",
+            userDescription: "Instructions for the LLM",
+          }}
+        />
+
+        <hr className="pb-4 mt-4 border-solid border-grey-900" />
+
         {props.connectionDef.configurationArguments.map((c, i) => (
           <div key={i} className="w-full py-1">
             <ConfigInput config={c} />
