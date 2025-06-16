@@ -15,10 +15,20 @@ datasource db {
 }
 
 model Connection {
-  id              Int     @id @default(autoincrement())
+  id              Int        @id @default(autoincrement())
   connectionID    String
   config          String
   enable          Boolean
   userDescription String
   aiDescription   String
+  auditLog        AuditLog[]
+}
+
+model AuditLog {
+  id           Int        @id @default(autoincrement())
+  connection   Connection @relation(fields: [connectionID], references: [id])
+  connectionID Int
+  timestamp    DateTime   @default(now())
+  message      String
+  data         String
 }

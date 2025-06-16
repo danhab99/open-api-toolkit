@@ -36,7 +36,12 @@ export async function getTools(id: string) {
 
 export async function getMyConnection(
   args: Prisma.ConnectionWhereInput,
-): Promise<OpenAPIConnection | undefined> {
+): Promise<
+  | (OpenAPIConnection & {
+      db: Awaited<ReturnType<typeof db.connection.findFirst>>;
+    })
+  | undefined
+> {
   const connectionDB = await db.connection.findFirst({
     where: args,
   });
@@ -49,13 +54,14 @@ export async function getMyConnection(
   const config = JSON.parse(connectionDB.config) as OpenAPIConnection["config"];
 
   return {
+    db: connectionDB,
     def,
     config,
     aiDescription: connectionDB.aiDescription,
     userDescription: connectionDB.userDescription,
     name: def.name,
     enabled: connectionDB.enable,
-  } as OpenAPIConnection;
+  };
 }
 
 export async function getMyConnections(

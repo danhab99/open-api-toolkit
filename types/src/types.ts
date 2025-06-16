@@ -10,9 +10,17 @@ export type ConfigDef = Identifier & {
 
 export type KVP = Record<string, any>;
 
+export type ToolResult = {
+  results: KVP;
+  log?: {
+    message?: string;
+    data?: any;
+  };
+};
+
 export type Tool = Identifier & {
   arguments: ConfigDef[];
-  handler: (config: KVP, args: KVP) => Promise<KVP>;
+  handler: (config: KVP, args: KVP) => Promise<ToolResult>;
 };
 
 export type OpenAPIConnectionDefinition = Identifier & {
