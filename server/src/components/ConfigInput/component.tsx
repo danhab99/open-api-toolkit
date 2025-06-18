@@ -16,7 +16,7 @@ export function ConfigInput(props: ConfigInputProps) {
         <Label htmlFor={id}>{props.config.name}</Label>
       </p>
       <p>
-        <Label htmlFor={id}>{props.config.userDescription}</Label>
+        <Label className="text-grey-500 text-xs" htmlFor={id}>{props.config.userDescription}</Label>
       </p>
       <Input id={id} type={props.config.type} name={props.config.name} />
     </div>

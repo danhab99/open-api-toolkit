@@ -6,7 +6,7 @@ import { db } from "open-api-db";
 export async function POST(req: NextRequest) {
   const url = new URL(req.url);
 
-  const [, connectionID, , toolName] = url.pathname.split("/");
+  const [, connectionID, toolName] = url.pathname.split("/");
 
   const connectionInfo = await getMyConnection({
     connectionID,
@@ -36,16 +36,14 @@ export async function POST(req: NextRequest) {
   try {
     const results = await tool.handler(config, url.searchParams);
 
-    if (results.log) {
-      await db.auditLog.create({
-        data: {
-          connectionID: connectionInfo.db!.id,
-          message: results.log?.message ?? `${connectionInfo.name} just ran`,
-          data: results.log?.data,
-        },
-        select: {},
-      });
-    }
+    await db.auditLog.create({
+      data: {
+        connectionID: connectionInfo.db!.id,
+        message: results.log?.message ?? `${connectionInfo.name} just ran`,
+        data: results.log?.data,
+      },
+      select: {},
+    });
 
     return new NextResponse(JSON.stringify(results), {
       status: 200,
@@ -55,16 +53,14 @@ export async function POST(req: NextRequest) {
       },
     });
   } catch (e: any) {
-    if (e) {
-      await db.auditLog.create({
-        data: {
-          connectionID: connectionInfo.db!.id,
-          message: `${connectionInfo.name} threw an exception`,
-          data: e,
-        },
-        select: {},
-      });
-    }
+    await db.auditLog.create({
+      data: {
+        connectionID: connectionInfo.db!.id,
+        message: `${connectionInfo.name} threw an exception`,
+        data: e,
+      },
+      select: {},
+    });
 
     return new NextResponse(
       JSON.stringify({

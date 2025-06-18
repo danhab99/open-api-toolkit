@@ -15,7 +15,7 @@ export async function GET() {
     const tools = await getTools(connection.def.id)
 
     for (const r of tools) {
-      paths[`/llm/${connection.name}/tool/${r.name}`] = {
+      paths[`/tool/${connection.name}/${r.name}`] = {
         post: {
           parameters: r.arguments.map((arg) => ({
             name: arg.name,
