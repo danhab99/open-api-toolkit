@@ -42,18 +42,16 @@ export async function getMyConnection(
     })
   | undefined
 > {
-  const connectionDB = await db.connection.findFirst({
+  const connectionDB = await db.connection.findFirstOrThrow({
     where: args,
   });
-
-  if (!connectionDB) {
-    return undefined;
-  }
 
   const def = await importConnection(connectionDB.connectionID);
   const config = JSON.parse(connectionDB.config) as OpenAPIConnection["config"];
 
   return {
+    id: connectionDB.id,
+    slug: "",
     db: connectionDB,
     def,
     config,
@@ -87,7 +85,9 @@ export async function getMyConnections(
   );
 }
 
-export async function createConnection(conn: OpenAPIConnection) {
+export async function createConnection(
+  conn: Omit<OpenAPIConnection, "id" | "slug">,
+) {
   const res = await db.connection.create({
     data: {
       aiDescription: conn.aiDescription,
@@ -114,16 +114,12 @@ export async function enableConnection(connectionID: string, enable: boolean) {
     },
   });
 
-  if (!r) {
-    throw "cannot find connection";
-  }
-
   await db.connection.update({
     data: {
       enable,
     },
     where: {
-      id: r.id,
+      id: r!.id,
     },
   });
 }
@@ -139,5 +135,28 @@ export async function deleteConnection(connectionID: string) {
   });
   await db.connection.delete({
     where: { id: r!.id },
+  });
+}
+
+export async function editConnection(
+  connectionID: string,
+  change: Partial<OpenAPIConnection>,
+) {
+  const r = await db.connection.findFirstOrThrow({
+    where: {
+      connectionID,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  await db.connection.update({
+    where: { id: r!.id },
+    data: {
+      aiDescription: change.aiDescription,
+      config: JSON.stringify(change.config),
+      userDescription: change.userDescription,
+    },
   });
 }

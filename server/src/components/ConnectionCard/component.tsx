@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,6 +15,7 @@ import { Switch } from "@/components/ui/switch";
 import { Table, TableBody, TableCell, TableRow } from "../ui/table";
 import { enableConnection, deleteConnection } from "@/lib/connection";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export type ConnectionCardProps = {
   enable: boolean;
@@ -22,7 +23,7 @@ export type ConnectionCardProps = {
 };
 
 export function ConnectionCard(props: ConnectionCardProps) {
-  const [enable, setEnable] = React.useState(props.enable);
+  const [enable, setEnable] = useState(props.enable);
   const router = useRouter();
 
   return (
@@ -62,7 +63,9 @@ export function ConnectionCard(props: ConnectionCardProps) {
         >
           Delete
         </Button>
-        <Button>Edit</Button>
+        <Link href={`/edit/${props.mcp.id}`}>
+          <Button>Edit</Button>
+        </Link>
       </CardFooter>
     </Card>
   );
