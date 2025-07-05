@@ -1,6 +1,5 @@
-import { google } from "googleapis";
-import { JWT } from "google-auth-library";
 import { Tool } from "open-api-connection-types";
+import { getTasks } from "../lib";
 
 export const deleteGoogleTask: Tool = {
   name: "deleteGoogleTask",
@@ -21,18 +20,8 @@ export const deleteGoogleTask: Tool = {
     },
   ],
   async handler(config, args) {
-    const { serviceAccountJson, userEmail } = config;
     const { tasklistId, taskId } = args;
-
-    const credentials = JSON.parse(serviceAccountJson);
-    const auth = new JWT({
-      email: credentials.client_email,
-      key: credentials.private_key,
-      scopes: ["https://www.googleapis.com/auth/tasks"],
-      subject: userEmail,
-    });
-
-    const tasks = google.tasks({ version: "v1", auth });
+    const tasks = getTasks(config);
 
     try {
       await tasks.tasks.delete({

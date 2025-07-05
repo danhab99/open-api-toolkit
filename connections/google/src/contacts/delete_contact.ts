@@ -1,6 +1,5 @@
-import { google } from "googleapis";
-import { JWT } from "google-auth-library";
 import { Tool } from "open-api-connection-types";
+import { getPeople } from "../lib";
 
 export const deleteGoogleContact: Tool = {
   name: "deleteGoogleContact",
@@ -15,18 +14,8 @@ export const deleteGoogleContact: Tool = {
     },
   ],
   async handler(config, args) {
-    const { serviceAccountJson, userEmail } = config;
     const { resourceName } = args;
-
-    const credentials = JSON.parse(serviceAccountJson);
-    const auth = new JWT({
-      email: credentials.client_email,
-      key: credentials.private_key,
-      scopes: ["https://www.googleapis.com/auth/contacts"],
-      subject: userEmail,
-    });
-
-    const people = google.people({ version: "v1", auth });
+    const people = getPeople(config);
 
     try {
       await people.people.deleteContact({

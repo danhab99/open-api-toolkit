@@ -1,6 +1,5 @@
-import { google } from "googleapis";
-import { JWT } from "google-auth-library";
 import { Tool } from "open-api-connection-types";
+import { getDrive } from "../lib";
 
 export const updateGoogleDriveFile: Tool = {
   name: "updateGoogleDriveFile",
@@ -27,18 +26,8 @@ export const updateGoogleDriveFile: Tool = {
     },
   ],
   async handler(config, args) {
-    const { serviceAccountJson, userEmail } = config;
-    const { fileId, name, parentFolderId } = args;
-
-    const credentials = JSON.parse(serviceAccountJson);
-    const auth = new JWT({
-      email: credentials.client_email,
-      key: credentials.private_key,
-      scopes: ["https://www.googleapis.com/auth/drive"],
-      subject: userEmail,
-    });
-
-    const drive = google.drive({ version: "v3", auth });
+    const { fileId, name } = args;
+    const drive = getDrive(config);
 
     try {
       // If parentFolderId is provided, need to update parents separately (move is separate tool)

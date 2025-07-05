@@ -1,6 +1,5 @@
-import { google } from "googleapis";
-import { JWT } from "google-auth-library";
 import { Tool } from "open-api-connection-types";
+import { getDrive } from "../lib";
 
 export const listGoogleDriveFiles: Tool = {
   name: "listGoogleDriveFiles",
@@ -28,18 +27,8 @@ export const listGoogleDriveFiles: Tool = {
     },
   ],
   async handler(config, args) {
-    const { serviceAccountJson, userEmail } = config;
     const { pageSize = 10, pageToken, q } = args;
-
-    const credentials = JSON.parse(serviceAccountJson);
-    const auth = new JWT({
-      email: credentials.client_email,
-      key: credentials.private_key,
-      scopes: ["https://www.googleapis.com/auth/drive.readonly"],
-      subject: userEmail,
-    });
-
-    const drive = google.drive({ version: "v3", auth });
+    const drive = getDrive(config);
 
     try {
       const res = await drive.files.list({

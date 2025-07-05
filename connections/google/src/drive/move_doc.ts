@@ -1,6 +1,5 @@
-import { google } from "googleapis";
-import { JWT } from "google-auth-library";
 import { Tool } from "open-api-connection-types";
+import { getDrive } from "../lib";
 
 export const moveGoogleDriveFile: Tool = {
   name: "moveGoogleDriveFile",
@@ -22,18 +21,8 @@ export const moveGoogleDriveFile: Tool = {
     },
   ],
   async handler(config, args) {
-    const { serviceAccountJson, userEmail } = config;
     const { fileId, targetFolderId } = args;
-
-    const credentials = JSON.parse(serviceAccountJson);
-    const auth = new JWT({
-      email: credentials.client_email,
-      key: credentials.private_key,
-      scopes: ["https://www.googleapis.com/auth/drive"],
-      subject: userEmail,
-    });
-
-    const drive = google.drive({ version: "v3", auth });
+    const drive = getDrive(config);
 
     try {
       // First get current parents

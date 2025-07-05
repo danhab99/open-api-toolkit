@@ -2,6 +2,7 @@ import { google } from "googleapis";
 import { JWT } from "google-auth-library";
 import { encode as base64url } from "base64url";
 import { Tool } from "open-api-connection-types";
+import { getGmail } from "../lib";
 
 export const sendGmailMessageWithServiceAccount: Tool = {
   name: "sendGmailMessageWithServiceAccount",
@@ -38,30 +39,8 @@ export const sendGmailMessageWithServiceAccount: Tool = {
     },
   ],
   async handler(config, args) {
-    const { serviceAccountJson, userEmail } = config;
     const { to, subject, body, isHtml } = args;
-
-    let credentials;
-    try {
-      credentials = JSON.parse(serviceAccountJson);
-    } catch (e) {
-      return {
-        results: {},
-        log: {
-          message: "Invalid service account JSON",
-          data: e,
-        },
-      };
-    }
-
-    const auth = new JWT({
-      email: credentials.client_email,
-      key: credentials.private_key,
-      scopes: ["https://www.googleapis.com/auth/gmail.send"],
-      subject: userEmail,
-    });
-
-    const gmail = google.gmail({ version: "v1", auth });
+    const gmail = getGmail(config);
 
     const contentType = isHtml === "true" ? "text/html" : "text/plain";
 

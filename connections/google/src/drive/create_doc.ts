@@ -1,6 +1,5 @@
-import { google } from "googleapis";
-import { JWT } from "google-auth-library";
 import { Tool } from "open-api-connection-types";
+import { getDrive } from "../lib";
 
 export const createGoogleDriveFile: Tool = {
   name: "createGoogleDriveFile",
@@ -29,18 +28,8 @@ export const createGoogleDriveFile: Tool = {
     },
   ],
   async handler(config, args) {
-    const { serviceAccountJson, userEmail } = config;
     const { name, mimeType, parentFolderId } = args;
-
-    const credentials = JSON.parse(serviceAccountJson);
-    const auth = new JWT({
-      email: credentials.client_email,
-      key: credentials.private_key,
-      scopes: ["https://www.googleapis.com/auth/drive"],
-      subject: userEmail,
-    });
-
-    const drive = google.drive({ version: "v3", auth });
+    const drive = getDrive(config);
 
     try {
       const fileMetadata: any = { name };

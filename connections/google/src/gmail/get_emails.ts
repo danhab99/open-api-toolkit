@@ -1,6 +1,7 @@
 import { google } from "googleapis";
 import { JWT } from "google-auth-library";
 import { Tool } from "open-api-connection-types";
+import { getGmail } from "../lib";
 
 export const getGmailThreadWithServiceAccount: Tool = {
   name: "getGmailThreadWithServiceAccount",
@@ -17,30 +18,8 @@ export const getGmailThreadWithServiceAccount: Tool = {
     },
   ],
   async handler(config, args) {
-    const { serviceAccountJson, userEmail } = config;
     const { threadId } = args;
-
-    let credentials;
-    try {
-      credentials = JSON.parse(serviceAccountJson);
-    } catch (e) {
-      return {
-        results: {},
-        log: {
-          message: "Invalid service account JSON",
-          data: e,
-        },
-      };
-    }
-
-    const auth = new JWT({
-      email: credentials.client_email,
-      key: credentials.private_key,
-      scopes: ["https://www.googleapis.com/auth/gmail.readonly"],
-      subject: userEmail,
-    });
-
-    const gmail = google.gmail({ version: "v1", auth });
+    const gmail = getGmail(config);
 
     try {
       const res = await gmail.users.threads.get({
@@ -54,7 +33,7 @@ export const getGmailThreadWithServiceAccount: Tool = {
         const headers = payload.headers || [];
 
         const getHeader = (name: string) =>
-          headers.find((h) => h.name.toLowerCase() === name.toLowerCase())
+          headers.find((h) => h.name?.toLowerCase() === name.toLowerCase())
             ?.value ?? "";
 
         const parts = payload.parts || [];

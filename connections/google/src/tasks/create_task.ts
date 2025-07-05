@@ -1,6 +1,5 @@
 import { Tool } from "open-api-connection-types";
-import { google } from "googleapis";
-import { JWT } from "google-auth-library";
+import { getTasks } from "../lib";
 
 export const createGoogleTask: Tool = {
   name: "createGoogleTask",
@@ -34,18 +33,8 @@ export const createGoogleTask: Tool = {
     },
   ],
   async handler(config, args) {
-    const { serviceAccountJson, userEmail } = config;
     const { tasklistId, title, notes, due } = args;
-
-    const credentials = JSON.parse(serviceAccountJson);
-    const auth = new JWT({
-      email: credentials.client_email,
-      key: credentials.private_key,
-      scopes: ["https://www.googleapis.com/auth/tasks"],
-      subject: userEmail,
-    });
-
-    const tasks = google.tasks({ version: "v1", auth });
+    const tasks = getTasks(config);
 
     try {
       const res = await tasks.tasks.insert({
