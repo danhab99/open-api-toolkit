@@ -5,7 +5,7 @@ export type Identifier = {
 };
 
 export type ConfigDef = Identifier & {
-  type: "string" | "number";
+  type: "string" | "number" | "boolean";
 };
 
 export type KVP = Record<string, any>;

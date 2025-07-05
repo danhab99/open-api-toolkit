@@ -1,0 +1,109 @@
+import { Tool } from "open-api-connection-types";
+import { getCalendar } from "../lib";
+
+export const createGoogleCalendarEventsWithServiceAccount: Tool = {
+  name: "createGoogleCalendarEventsWithServiceAccount",
+  userDescription:
+    "create events on a Google Calendar using a service account.",
+  aiDescription:
+    "Create calendar events using a configured Google service account on a specific calendar.",
+  arguments: [
+    {
+      name: "calendarId",
+      type: "string",
+      userDescription:
+        "The calendar ID to retrieve events from (e.g., 'primary' for your primary calendar or an email address like 'calendar@example.com'). This specifies which calendar the tool will interact with.",
+      aiDescription:
+        "Identifies the Google Calendar by its unique ID, determining where events are created or listed.",
+    },
+    {
+      name: "startDate",
+      type: "string",
+      userDescription:
+        "Start date in ISO format (e.g., '2025-06-01T00:00:00Z'). This marks the beginning of the time range for filtering calendar events.",
+      aiDescription:
+        "Specifies the earliest start datetime to filter and retrieve events from the Google Calendar.",
+    },
+    {
+      name: "endDate",
+      type: "string",
+      userDescription:
+        "End date in ISO format (e.g., '2025-06-30T00:00:00Z'). This marks the end of the time range for filtering calendar events.",
+      aiDescription:
+        "Defines the latest end datetime to filter and retrieve events from the Google Calendar.",
+    },
+    {
+      name: "description",
+      type: "string",
+      userDescription:
+        "A brief description of the event. This can include details such as the purpose or agenda, helping attendees understand the event context.",
+      aiDescription:
+        "Provides a detailed text summary for the event to be added to Google Calendar.",
+    },
+    {
+      name: "summary",
+      type: "string",
+      userDescription:
+        "A concise title for the event. This is displayed in calendars and serves as an overview of what the event is about.",
+      aiDescription:
+        "Sets the brief title or summary for a new calendar event, appearing prominently in schedules.",
+    },
+    {
+      name: "recurring",
+      type: "boolean",
+      userDescription:
+        "Indicates whether this event recurs. Set to true if the event repeats at regular intervals, such as daily or weekly.",
+      aiDescription:
+        "Determines if the created event should be recurring, repeating based on specified rules.",
+    },
+    {
+      name: "location",
+      type: "string",
+      userDescription:
+        "The physical location where the event will occur. This can be an address or a general place description.",
+      aiDescription:
+        "Specifies the venue for the calendar event, aiding attendees in locating the event.",
+    },
+  ],
+  async handler(config, args) {
+    const { calendarId, startDate, endDate, maxResults } = args;
+    const calendar = getCalendar(config);
+
+    try {
+      const res = await calendar.events.insert({
+        calendarId: args.calendarId,
+        requestBody: {
+          description: args.description,
+          end: args.endDate,
+          eventType: "default",
+          start: args.startDate,
+          location: args.location,
+          recurrence: args.recurring,
+          visibility: "private",
+          endTimeUnspecified: !!args.endDate,
+          summary: args.summary,
+        },
+      });
+
+      const ok = res.status >= 200 && res.status < 300;
+
+      return {
+        results: {
+          ok,
+        },
+        log: {
+          ok,
+          res,
+        },
+      };
+    } catch (error) {
+      return {
+        results: {},
+        log: {
+          message: "Failed to fetch calendar events",
+          data: error,
+        },
+      };
+    }
+  },
+};

@@ -1,5 +1,5 @@
 import { OpenAPIConnectionDefinition } from "open-api-connection-types";
-import { createGoogleCalendarEventTool } from "./calendar";
+import { createGoogleCalendarEventsWithServiceAccount } from "./calendar/create_calendar";
 import { deleteGoogleCalendarEventWithServiceAccount } from "./calendar/delete_calendar";
 import { editGoogleCalendarEventWithServiceAccount } from "./calendar/edit_calendar";
 import { createGoogleContact } from "./contacts/create_contact";
@@ -22,9 +22,8 @@ import { updateGoogleTask } from "./tasks/update_task";
 export const Connection: OpenAPIConnectionDefinition = {
   id: "google_calendar",
   name: "Google Calendar",
-  userDescription: "Connects to Google Calendar using a service account",
-  aiDescription:
-    "Allows tools to manage events in a Google Calendar via the API",
+  userDescription: "Connects to Google using a service account",
+  aiDescription: "Allows tools to manage google products for the user",
   configurationArguments: [
     {
       name: "serviceAccountJson",
@@ -43,7 +42,7 @@ export const Connection: OpenAPIConnectionDefinition = {
 } as OpenAPIConnectionDefinition;
 
 export const Tools = [
-  createGoogleCalendarEventTool,
+  createGoogleCalendarEventsWithServiceAccount,
   deleteGoogleCalendarEventWithServiceAccount,
   editGoogleCalendarEventWithServiceAccount,
   createGoogleContact,
