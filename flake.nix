@@ -31,8 +31,8 @@
               "${pkgs.prisma-engines}/bin/schema-engine";
 
             DATABASE_PATH="file:/home/dan/Documents/node/mcp-server/db";
-
             shellHook = ''
+            export DATABASE_PATH="file:$(dirname $(realpath $(git rev-parse --git-dir)) )/db"
             zsh
             '';
           };
