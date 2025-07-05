@@ -39,8 +39,8 @@ export function CreateConnection(props: CreateConnectionProps) {
     });
 
     const name = data.get("Name")?.toString() ?? `${conn.name}`;
-    const userDescription = data.get("Description")?.toString() ?? "";
-    const aiDescription = data.get("Prompt")?.toString() ?? "";
+    const userDescription = data.get("Description")?.toString() ?? conn.userDescription;
+    const aiDescription = data.get("Prompt")?.toString() ?? conn.aiDescription;
 
     if ("connectionDef" in props) {
       await createConnection({
@@ -107,7 +107,7 @@ export function CreateConnection(props: CreateConnectionProps) {
 
         <div className="flex flex-row gap-2 py-2">
           <Button type="submit">
-            {"connection" in props ? "Save" : "handleSubmit"}
+            {"connection" in props ? "Save" : "Add"}
           </Button>
           <Button onClick={handleBack} variant="outline" type="reset">
             Cancel

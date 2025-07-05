@@ -23,7 +23,7 @@ export async function importConnection(id: string) {
   const x = Connections.find((x) => x.id === id);
   if (!x) throw "no connection found";
 
-  return JSON.parse(JSON.stringify(x));
+  return JSON.parse(JSON.stringify(x)) as OpenAPIConnectionDefinition
 }
 
 export async function getTools(id: string) {

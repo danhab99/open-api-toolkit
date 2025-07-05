@@ -20,8 +20,8 @@ import { listGoogleTasks } from "./tasks/list_tasks";
 import { updateGoogleTask } from "./tasks/update_task";
 
 export const Connection: OpenAPIConnectionDefinition = {
-  id: "google_calendar",
-  name: "Google Calendar",
+  id: "google",
+  name: "Google",
   userDescription: "Connects to Google using a service account",
   aiDescription: "Allows tools to manage google products for the user",
   configurationArguments: [
