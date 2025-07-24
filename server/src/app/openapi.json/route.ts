@@ -56,6 +56,7 @@ export async function GET() {
     for (const r of tools) {
       paths[`/tool/${connection.id}/${r.name}`] = {
         post: {
+          operationId: r.name,
           parameters: r.arguments.map((arg) => ({
             name: arg.name,
             description: arg.aiDescription,
@@ -86,6 +87,7 @@ export async function GET() {
         title: "OpenAPI Toolkit",
         version: "1.0.0",
       },
+      "x-openai-is-compatible": true,
       paths,
       components,
     }),
