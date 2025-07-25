@@ -2,7 +2,6 @@
 import {
   getMyConnections,
   getTools,
-  getAllConnections,
 } from "@/lib/connection";
 import { NextResponse } from "next/server";
 
@@ -48,24 +47,25 @@ export async function GET() {
     }
 
     paths[`/tool/${connection.id}`] = {
-      summary: connection.aiDescription,
+      summary: connection.aiDescription ?? connection.def.aiDescription,
     };
 
     const tools = await getTools(connection.def.id);
 
+    let i = 0;
     for (const r of tools) {
-      paths[`/tool/${connection.id}/${r.name}`] = {
+      paths[`/tool/${connection.id}/${r.id}`] = {
         post: {
-          operationId: r.name,
+          operationId: r.id,
           parameters: r.arguments.map((arg) => ({
-            name: arg.name,
+            name: arg.id,
             description: arg.aiDescription,
             in: "query",
             schema: {
               type: arg.type,
             },
           })),
-          summary: r.aiDescription,
+          summary: r.aiDescription ?? connection.def.configurationArguments[i].aiDescription,
           responses: {
             "200": {
               $ref: "#/components/responses/ToolFinished",
@@ -76,6 +76,7 @@ export async function GET() {
           },
         },
       };
+      i++
     }
   }
 

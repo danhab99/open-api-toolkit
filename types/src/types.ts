@@ -43,6 +43,6 @@ export type OpenAPIConnection = Identifier & {
 };
 
 export type ConfigurationSet<T extends Array<ConfigDef>> = Record<
-  T[number]["name"],
+  T[number]["id"],
   string | number
 >;

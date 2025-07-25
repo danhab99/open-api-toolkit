@@ -35,7 +35,7 @@ export default async function Page({ params }: PageProps) {
               className="border border-gray-100 rounded-lg p-4 shadow ml-4 my-4"
             >
               <h5 className="text-xs text-gray-500 underline leading-none overflow-none text-ellipsis align-middle">
-                {tool.name}
+                {tool.displayName}
               </h5>
               <p>{tool.userDescription}</p>
             </div>
