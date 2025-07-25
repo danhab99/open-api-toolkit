@@ -2,33 +2,38 @@ import { Tool } from "open-api-connection-types";
 import { getCalendar } from "../lib";
 
 export const viewGoogleCalendarEventsWithServiceAccount: Tool = {
-  name: "viewGoogleCalendarEventsWithServiceAccount",
+  id: "viewGoogleCalendarEventsWithServiceAccount",
+  displayName: "View calendar",
   userDescription:
     "View upcoming events from a Google Calendar using a service account.",
   aiDescription:
     "Retrieve calendar events using a configured Google service account with access to a specific calendar.",
   arguments: [
     {
-      name: "calendarId",
+      id: "calendarId",
+      displayName: "Calendar ID",
       type: "string",
       userDescription:
         "The calendar ID to retrieve events from (e.g., primary, or calendar@example.com).",
       aiDescription: "Google Calendar ID to list events from.",
     },
     {
-      name: "startDate",
+      id: "startDate",
+      displayName: "Start Date",
       type: "string",
       userDescription: "Start date (ISO format, e.g. 2025-06-01T00:00:00Z).",
       aiDescription: "Earliest start time of events to fetch.",
     },
     {
-      name: "endDate",
+      id: "endDate",
+      displayName: "End Date",
       type: "string",
       userDescription: "End date (ISO format, e.g. 2025-06-30T00:00:00Z).",
       aiDescription: "Latest end time of events to fetch.",
     },
     {
-      name: "maxResults",
+      id: "maxResults",
+      displayName: "Max Results",
       type: "number",
       userDescription: "Maximum number of events to return.",
       aiDescription: "Limit for the number of events returned.",

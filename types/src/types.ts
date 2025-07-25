@@ -1,5 +1,6 @@
 export type Identifier = {
-  name: string;
+  id: string;
+  displayName: string;
   userDescription: string;
   aiDescription: string;
 };

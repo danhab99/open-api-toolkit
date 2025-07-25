@@ -2,38 +2,44 @@ import { Tool } from "open-api-connection-types";
 import { getTasks } from "../lib";
 
 export const updateGoogleTask: Tool = {
-  name: "updateGoogleTask",
+  id: "updateGoogleTask",
+  displayName: "Update task",
   userDescription:
     "Update a task's details in a specified Google Tasks task list.",
   aiDescription:
     "Updates the title, notes, and/or due date of an existing task.",
   arguments: [
     {
-      name: "tasklistId",
+      id: "tasklistId",
+      displayName: "Task List ID",
       type: "string",
       userDescription: "ID of the task list.",
       aiDescription: "Task list identifier.",
     },
     {
-      name: "taskId",
+      id: "taskId",
+      displayName: "Task ID",
       type: "string",
       userDescription: "ID of the task to update.",
       aiDescription: "Task identifier.",
     },
     {
-      name: "title",
+      id: "title",
+      displayName: "Title",
       type: "string",
       userDescription: "New task title.",
       aiDescription: "Updated title.",
     },
     {
-      name: "notes",
+      id: "notes",
+      displayName: "Notes",
       type: "string",
       userDescription: "New notes for the task.",
       aiDescription: "Updated notes.",
     },
     {
-      name: "due",
+      id: "due",
+      displayName: "Due Date",
       type: "string",
       userDescription: "New ISO due date.",
       aiDescription: "Updated due date/time.",

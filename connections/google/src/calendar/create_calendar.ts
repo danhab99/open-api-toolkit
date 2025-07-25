@@ -2,14 +2,16 @@ import { Tool } from "open-api-connection-types";
 import { getCalendar } from "../lib";
 
 export const createGoogleCalendarEventsWithServiceAccount: Tool = {
-  name: "createGoogleCalendarEventsWithServiceAccount",
+  id: "createGoogleCalendarEventsWithServiceAccount",
+  displayName: "Create calendar events",
   userDescription:
     "create events on a Google Calendar using a service account.",
   aiDescription:
     "Create calendar events using a configured Google service account on a specific calendar.",
   arguments: [
     {
-      name: "calendarId",
+      id: "calendarId",
+      displayName: "Calendar ID",
       type: "string",
       userDescription:
         "The calendar ID to retrieve events from (e.g., 'primary' for your primary calendar or an email address like 'calendar@example.com'). This specifies which calendar the tool will interact with.",
@@ -17,7 +19,8 @@ export const createGoogleCalendarEventsWithServiceAccount: Tool = {
         "Identifies the Google Calendar by its unique ID, determining where events are created or listed.",
     },
     {
-      name: "startDate",
+      id: "startDate",
+      displayName: "Start Date",
       type: "string",
       userDescription:
         "Start date in ISO format (e.g., '2025-06-01T00:00:00Z'). This marks the beginning of the time range for filtering calendar events.",
@@ -25,7 +28,8 @@ export const createGoogleCalendarEventsWithServiceAccount: Tool = {
         "Specifies the earliest start datetime to filter and retrieve events from the Google Calendar.",
     },
     {
-      name: "endDate",
+      id: "endDate",
+      displayName: "End Date",
       type: "string",
       userDescription:
         "End date in ISO format (e.g., '2025-06-30T00:00:00Z'). This marks the end of the time range for filtering calendar events.",
@@ -33,7 +37,8 @@ export const createGoogleCalendarEventsWithServiceAccount: Tool = {
         "Defines the latest end datetime to filter and retrieve events from the Google Calendar.",
     },
     {
-      name: "description",
+      id: "description",
+      displayName: "Description",
       type: "string",
       userDescription:
         "A brief description of the event. This can include details such as the purpose or agenda, helping attendees understand the event context.",
@@ -41,7 +46,8 @@ export const createGoogleCalendarEventsWithServiceAccount: Tool = {
         "Provides a detailed text summary for the event to be added to Google Calendar.",
     },
     {
-      name: "summary",
+      id: "summary",
+      displayName: "Summary",
       type: "string",
       userDescription:
         "A concise title for the event. This is displayed in calendars and serves as an overview of what the event is about.",
@@ -49,7 +55,8 @@ export const createGoogleCalendarEventsWithServiceAccount: Tool = {
         "Sets the brief title or summary for a new calendar event, appearing prominently in schedules.",
     },
     {
-      name: "recurring",
+      id: "recurring",
+      displayName: "Recurring",
       type: "boolean",
       userDescription:
         "Indicates whether this event recurs. Set to true if the event repeats at regular intervals, such as daily or weekly.",
@@ -57,7 +64,8 @@ export const createGoogleCalendarEventsWithServiceAccount: Tool = {
         "Determines if the created event should be recurring, repeating based on specified rules.",
     },
     {
-      name: "location",
+      id: "location",
+      displayName: "Location",
       type: "string",
       userDescription:
         "The physical location where the event will occur. This can be an address or a general place description.",

@@ -5,32 +5,37 @@ import { Tool } from "open-api-connection-types";
 import { getGmail } from "../lib";
 
 export const sendGmailMessageWithServiceAccount: Tool = {
-  name: "sendGmailMessageWithServiceAccount",
+  id: "sendGmailMessageWithServiceAccount",
+  displayName: "Send Email",
   userDescription:
     "Send an email using the Gmail API and a service account with delegated access.",
   aiDescription:
     "Sends an email from a user's Gmail account using service account impersonation.",
   arguments: [
     {
-      name: "to",
+      id: "to",
+      displayName: "Recipient",
       type: "string",
       userDescription: "The recipient's email address.",
       aiDescription: "Recipient's email address.",
     },
     {
-      name: "subject",
+      id: "subject",
+      displayName: "Subject",
       type: "string",
       userDescription: "Subject line of the email.",
       aiDescription: "Email subject.",
     },
     {
-      name: "body",
+      id: "body",
+      displayName: "Body",
       type: "string",
       userDescription: "Body of the email in plain text or HTML.",
       aiDescription: "Email content (text or HTML).",
     },
     {
-      name: "isHtml",
+      id: "isHtml",
+      displayName: "Is HTML",
       type: "string",
       userDescription:
         "Set to 'true' to send HTML content. Defaults to plain text.",

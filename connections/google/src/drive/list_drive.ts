@@ -2,25 +2,29 @@ import { Tool } from "open-api-connection-types";
 import { getDrive } from "../lib";
 
 export const listGoogleDriveFiles: Tool = {
-  name: "listGoogleDriveFiles",
+  id: "listGoogleDriveFiles",
+  displayName: "List files",
   userDescription: "List files in Google Drive with pagination support.",
   aiDescription:
     "Retrieves a list of files, optionally specifying page size and page token.",
   arguments: [
     {
-      name: "pageSize",
+      id: "pageSize",
+      displayName: "Page Size",
       type: "number",
       userDescription: "Number of files to return.",
       aiDescription: "Max results per page.",
     },
     {
-      name: "pageToken",
+      id: "pageToken",
+      displayName: "Page Token",
       type: "string",
       userDescription: "Token for the next page of results.",
       aiDescription: "Pagination token.",
     },
     {
-      name: "q",
+      id: "q",
+      displayName: "Query",
       type: "string",
       userDescription: "Optional search query (Drive API query syntax).",
       aiDescription: "Query string to filter files.",

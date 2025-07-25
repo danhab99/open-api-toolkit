@@ -2,31 +2,36 @@ import { Tool } from "open-api-connection-types";
 import { getPeople } from "../lib";
 
 export const createGoogleContact: Tool = {
-  name: "createGoogleContact",
+  id: "createGoogleContact",
+  displayName: "Create Contact",
   userDescription: "Create a new contact in Google Contacts.",
   aiDescription:
     "Creates a new contact with given names, email, and phone number.",
   arguments: [
     {
-      name: "givenName",
+      id: "givenName",
+      displayName: "Given Name",
       type: "string",
       userDescription: "Contact's first name.",
       aiDescription: "First name of contact.",
     },
     {
-      name: "familyName",
+      id: "familyName",
+      displayName: "Family Name",
       type: "string",
       userDescription: "Contact's last name.",
       aiDescription: "Last name of contact.",
     },
     {
-      name: "email",
+      id: "email",
+      displayName: "Email",
       type: "string",
       userDescription: "Contact's email address.",
       aiDescription: "Primary email.",
     },
     {
-      name: "phoneNumber",
+      id: "phoneNumber",
+      displayName: "Phone Number",
       type: "string",
       userDescription: "Contact's phone number.",
       aiDescription: "Primary phone number.",

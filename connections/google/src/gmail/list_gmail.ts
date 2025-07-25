@@ -1,17 +1,17 @@
-import { google } from "googleapis";
-import { JWT } from "google-auth-library";
 import { Tool } from "open-api-connection-types";
 import { getGmail } from "../lib";
 
 export const listGmailMessagesWithServiceAccount: Tool = {
-  name: "listGmailMessagesWithServiceAccount",
+  id: "listGmailMessagesWithServiceAccount",
+  displayName: "List emails",
   userDescription:
     "List the user's Gmail messages in pages of 10 using a service account with delegated access.",
   aiDescription:
     "Lists Gmail messages for a user in pages of 10 using service account impersonation.",
   arguments: [
     {
-      name: "pageToken",
+      id: "pageToken",
+      displayName: "Page Token",
       type: "string",
       userDescription:
         "Optional page token to continue from the previous result page.",

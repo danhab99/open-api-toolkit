@@ -2,46 +2,53 @@ import { Tool } from "open-api-connection-types";
 import { getCalendar } from "../lib";
 
 export const editGoogleCalendarEventWithServiceAccount: Tool = {
-  name: "editGoogleCalendarEventWithServiceAccount",
+  id: "editGoogleCalendarEventWithServiceAccount",
+  displayName: "Edit Event",
   userDescription:
     "Edit an existing event in a Google Calendar using a service account.",
   aiDescription:
     "Update an existing event's details (e.g., time or title) using a service account.",
   arguments: [
     {
-      name: "calendarId",
+      id: "calendarId",
+      displayName: "Calendar ID",
       type: "string",
       userDescription:
         "The calendar ID containing the event (e.g., 'primary' or calendar@example.com).",
       aiDescription: "Google Calendar ID where the event is located.",
     },
     {
-      name: "eventId",
+      id: "eventId",
+      displayName: "Event ID",
       type: "string",
       userDescription: "The ID of the event to update.",
       aiDescription:
         "Unique identifier of the Google Calendar event to be edited.",
     },
     {
-      name: "summary",
+      id: "summary",
+      displayName: "Summary",
       type: "string",
       userDescription: "Updated event title (optional).",
       aiDescription: "New title for the event (optional).",
     },
     {
-      name: "description",
+      id: "description",
+      displayName: "Description",
       type: "string",
       userDescription: "Updated event description (optional).",
       aiDescription: "New description for the event (optional).",
     },
     {
-      name: "start",
+      id: "start",
+      displayName: "Start",
       type: "string",
       userDescription: "Updated start datetime in ISO format (optional).",
       aiDescription: "New start time in ISO 8601 format (optional).",
     },
     {
-      name: "end",
+      id: "end",
+      displayName: "End",
       type: "string",
       userDescription: "Updated end datetime in ISO format (optional).",
       aiDescription: "New end time in ISO 8601 format (optional).",

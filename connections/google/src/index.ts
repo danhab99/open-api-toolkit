@@ -23,18 +23,20 @@ import { viewGoogleCalendarEventsWithServiceAccount } from "./calendar/view_cale
 
 export const Connection: OpenAPIConnectionDefinition = {
   id: "google",
-  name: "Google",
+  displayName: "Google",
   userDescription: "Connects to Google using a service account",
   aiDescription: "Allows tools to manage google products for the user",
   configurationArguments: [
     {
-      name: "serviceAccountJson",
+      id: "serviceAccountJson",
+      displayName: "Service Account",
       userDescription: "Service Account JSON",
       aiDescription: "The Google service account credentials as a JSON string",
       type: "string",
     },
     {
-      name: "userEmail",
+      id: "userEmail",
+      displayName: "User Email",
       type: "string",
       userDescription: "The email address of the user to impersonate.",
       aiDescription:

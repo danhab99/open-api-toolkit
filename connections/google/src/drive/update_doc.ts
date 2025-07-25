@@ -2,24 +2,28 @@ import { Tool } from "open-api-connection-types";
 import { getDrive } from "../lib";
 
 export const updateGoogleDriveFile: Tool = {
-  name: "updateGoogleDriveFile",
+  id: "updateGoogleDriveFile",
+  displayName: "Update file",
   userDescription: "Update file metadata such as name or parent folder.",
   aiDescription: "Updates the file's name or parent folder.",
   arguments: [
     {
-      name: "fileId",
+      id: "fileId",
+      displayName: "File ID",
       type: "string",
       userDescription: "ID of the file to update.",
       aiDescription: "File resource ID.",
     },
     {
-      name: "name",
+      id: "name",
+      displayName: "Name",
       type: "string",
       userDescription: "New name for the file (optional).",
       aiDescription: "Updated file name.",
     },
     {
-      name: "parentFolderId",
+      id: "parentFolderId",
+      displayName: "Parent Folder ID",
       type: "string",
       userDescription: "New parent folder ID (optional).",
       aiDescription: "Updated parent folder ID.",

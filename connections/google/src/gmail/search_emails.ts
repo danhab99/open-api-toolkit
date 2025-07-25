@@ -4,14 +4,16 @@ import { Tool } from "open-api-connection-types";
 import { getGmail } from "../lib";
 
 export const searchGmailMessagesWithServiceAccount: Tool = {
-  name: "searchGmailMessagesWithServiceAccount",
+  id: "searchGmailMessagesWithServiceAccount",
+  displayName: "Search Emails",
   userDescription:
     "Search Gmail for messages using a query string and return up to 10 results.",
   aiDescription:
     "Searches a user's Gmail inbox using a search query string. Returns up to 10 emails.",
   arguments: [
     {
-      name: "q",
+      id: "q",
+      displayName: "Query",
       type: "string",
       userDescription:
         "Gmail-compatible search query (e.g. 'from:boss has:attachment')",

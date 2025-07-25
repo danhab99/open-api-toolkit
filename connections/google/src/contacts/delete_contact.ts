@@ -2,12 +2,14 @@ import { Tool } from "open-api-connection-types";
 import { getPeople } from "../lib";
 
 export const deleteGoogleContact: Tool = {
-  name: "deleteGoogleContact",
+  id: "deleteGoogleContact",
+  displayName: "Delete Contact",
   userDescription: "Delete a contact by resource name.",
   aiDescription: "Deletes the specified contact from Google Contacts.",
   arguments: [
     {
-      name: "resourceName",
+      id: "resourceName",
+      displayName: "Resource Name",
       type: "string",
       userDescription: "Resource name of contact to delete.",
       aiDescription: "Contact resource identifier.",

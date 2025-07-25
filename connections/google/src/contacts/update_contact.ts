@@ -2,42 +2,49 @@ import { Tool } from "open-api-connection-types";
 import { getPeople } from "../lib";
 
 export const updateGoogleContact: Tool = {
-  name: "updateGoogleContact",
+  displayName: "Update contact",
+  id: "updateGoogleContact",
   userDescription: "Update an existing contact by resource name.",
   aiDescription: "Updates contact's name, email, and phone number.",
   arguments: [
     {
-      name: "resourceName",
+      id: "resourceName",
+      displayName: "Resource Name",
       type: "string",
       userDescription: "Resource name of contact (e.g. people/c12345).",
       aiDescription: "Contact resource identifier.",
     },
     {
-      name: "etag",
+      id: "etag",
+      displayName: "ETag",
       type: "string",
       userDescription: "ETag of the contact for concurrency.",
       aiDescription: "Contact version tag.",
     },
     {
-      name: "givenName",
+      id: "givenName",
+      displayName: "Given Name",
       type: "string",
       userDescription: "Updated first name.",
       aiDescription: "First name of contact.",
     },
     {
-      name: "familyName",
+      id: "familyName",
+      displayName: "Family Name",
       type: "string",
       userDescription: "Updated last name.",
       aiDescription: "Last name of contact.",
     },
     {
-      name: "email",
+      id: "email",
+      displayName: "Email",
       type: "string",
       userDescription: "Updated email.",
       aiDescription: "Primary email address.",
     },
     {
-      name: "phoneNumber",
+      id: "phoneNumber",
+      displayName: "Phone Number",
       type: "string",
       userDescription: "Updated phone number.",
       aiDescription: "Primary phone number.",

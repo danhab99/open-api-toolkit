@@ -2,12 +2,14 @@ import { Tool } from "open-api-connection-types";
 import { getDrive } from "../lib";
 
 export const deleteGoogleDriveFile: Tool = {
-  name: "deleteGoogleDriveFile",
+  id: "deleteGoogleDriveFile",
+  displayName: "Delete file",
   userDescription: "Delete a file from Google Drive by ID.",
   aiDescription: "Deletes the file specified by file ID.",
   arguments: [
     {
-      name: "fileId",
+      id: "fileId",
+      displayName: "File ID",
       type: "string",
       userDescription: "ID of the file to delete.",
       aiDescription: "File resource ID.",

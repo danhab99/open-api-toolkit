@@ -2,14 +2,16 @@ import { Tool } from "open-api-connection-types";
 import { getCalendar } from "../lib";
 
 export const deleteGoogleCalendarEventWithServiceAccount: Tool = {
-  name: "deleteGoogleCalendarEventWithServiceAccount",
+  id: "deleteGoogleCalendarEventWithServiceAccount",
+  displayName: "Delete Calendar Event",
   userDescription:
     "Delete an event from a Google Calendar using a service account.",
   aiDescription:
     "Remove a specific event from a Google Calendar using service account credentials.",
   arguments: [
     {
-      name: "calendarId",
+      id: "calendarId",
+      displayName: "Calendar ID",
       type: "string",
       userDescription:
         "The calendar ID where the event exists (e.g., 'primary' or calendar@example.com).",
@@ -17,7 +19,8 @@ export const deleteGoogleCalendarEventWithServiceAccount: Tool = {
         "Calendar identifier from which the event should be deleted.",
     },
     {
-      name: "eventId",
+      id: "eventId",
+      displayName: "Event ID",
       type: "string",
       userDescription: "The ID of the event to delete.",
       aiDescription: "Unique identifier of the calendar event to be deleted.",

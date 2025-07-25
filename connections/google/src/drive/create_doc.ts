@@ -2,26 +2,30 @@ import { Tool } from "open-api-connection-types";
 import { getDrive } from "../lib";
 
 export const createGoogleDriveFile: Tool = {
-  name: "createGoogleDriveFile",
+  id: "createGoogleDriveFile",
+  displayName: "Create file",
   userDescription: "Create a new file in Google Drive.",
   aiDescription:
     "Creates a file with a given name, mimeType, and optional parent folder.",
   arguments: [
     {
-      name: "name",
+      id: "name",
+      displayName: "Name",
       type: "string",
       userDescription: "Name of the new file.",
       aiDescription: "File name.",
     },
     {
-      name: "mimeType",
+      id: "mimeType",
+      displayName: "Mime Type",
       type: "string",
       userDescription:
         "MIME type of the file (e.g., application/vnd.google-apps.document).",
       aiDescription: "File MIME type.",
     },
     {
-      name: "parentFolderId",
+      id: "parentFolderId",
+      displayName: "Parent Folder ID",
       type: "string",
       userDescription: "ID of the parent folder (optional).",
       aiDescription: "Parent folder resource ID.",

@@ -2,19 +2,22 @@ import { Tool } from "open-api-connection-types";
 import { getDrive } from "../lib";
 
 export const moveGoogleDriveFile: Tool = {
-  name: "moveGoogleDriveFile",
+  id: "moveGoogleDriveFile",
+  displayName: "Move file",
   userDescription: "Move a file to another folder in Google Drive.",
   aiDescription:
     "Moves the file by adding a new parent folder and removing the old one.",
   arguments: [
     {
-      name: "fileId",
+      id: "fileId",
+      displayName: "File ID",
       type: "string",
       userDescription: "ID of the file to move.",
       aiDescription: "File resource ID.",
     },
     {
-      name: "targetFolderId",
+      id: "targetFolderId",
+      displayName: "Target Folder ID",
       type: "string",
       userDescription: "ID of the destination folder.",
       aiDescription: "New parent folder ID.",

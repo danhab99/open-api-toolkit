@@ -1,17 +1,17 @@
-import { google } from "googleapis";
-import { JWT } from "google-auth-library";
 import { Tool } from "open-api-connection-types";
 import { getGmail } from "../lib";
 
 export const getGmailThreadWithServiceAccount: Tool = {
-  name: "getGmailThreadWithServiceAccount",
+  id: "getGmailThreadWithServiceAccount",
+  displayName: "Get Gmail Thread",
   userDescription:
     "Fetch all messages in an email thread using a service account and delegated access.",
   aiDescription:
     "Retrieves a Gmail thread including all messages using service account impersonation.",
   arguments: [
     {
-      name: "threadId",
+      id: "threadId",
+      displayName: "Thread ID",
       type: "string",
       userDescription: "The ID of the Gmail thread to retrieve.",
       aiDescription: "Gmail thread ID.",

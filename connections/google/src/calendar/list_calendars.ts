@@ -2,7 +2,8 @@ import { Tool } from "open-api-connection-types";
 import { getCalendar } from "../lib";
 
 export const listGoogleCalendarsWithServiceAccount: Tool = {
-  name: "listGoogleCalendarsWithServiceAccount",
+  id: "listGoogleCalendarsWithServiceAccount",
+  displayName: "List calendar events",
   userDescription:
     "View upcoming events from a Google Calendar using a service account.",
   aiDescription:
