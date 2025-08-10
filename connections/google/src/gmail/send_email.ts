@@ -5,7 +5,7 @@ import { Tool } from "open-api-connection-types";
 import { getGmail } from "../lib";
 
 export const sendGmailMessageWithServiceAccount: Tool = {
-  id: "sendGmailMessageWithServiceAccount",
+  id: "sendGmailMessage",
   displayName: "Send Email",
   userDescription:
     "Send an email using the Gmail API and a service account with delegated access.",

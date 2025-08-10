@@ -4,7 +4,7 @@ import { Tool } from "open-api-connection-types";
 import { getGmail } from "../lib";
 
 export const searchGmailMessagesWithServiceAccount: Tool = {
-  id: "searchGmailMessagesWithServiceAccount",
+  id: "searchGmailMessages",
   displayName: "Search Emails",
   userDescription:
     "Search Gmail for messages using a query string and return up to 10 results.",

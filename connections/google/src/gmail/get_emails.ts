@@ -2,7 +2,7 @@ import { Tool } from "open-api-connection-types";
 import { getGmail } from "../lib";
 
 export const getGmailThreadWithServiceAccount: Tool = {
-  id: "getGmailThreadWithServiceAccount",
+  id: "getGmailThread",
   displayName: "Get Gmail Thread",
   userDescription:
     "Fetch all messages in an email thread using a service account and delegated access.",

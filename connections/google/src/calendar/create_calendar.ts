@@ -2,12 +2,12 @@ import { Tool } from "open-api-connection-types";
 import { getCalendar } from "../lib";
 
 export const createGoogleCalendarEventsWithServiceAccount: Tool = {
-  id: "createGoogleCalendarEventsWithServiceAccount",
-  displayName: "Create calendar events",
+  id: "createGoogleCalendarEvent",
+  displayName: "Create calendar event",
   userDescription:
-    "create events on a Google Calendar using a service account.",
+    "create event on a Google Calendar using a service account.",
   aiDescription:
-    "Create calendar events using a configured Google service account on a specific calendar.",
+    "Create calendar event using a configured Google service account on a specific calendar.",
   arguments: [
     {
       id: "calendarId",

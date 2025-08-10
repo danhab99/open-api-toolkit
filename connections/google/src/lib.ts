@@ -27,7 +27,10 @@ export function getJWT(
 }
 
 export function getCalendar(config: KVP) {
-  const client = getJWT(config, ["https://www.googleapis.com/auth/calendar"]);
+  const client = getJWT(config, [
+    "https://www.googleapis.com/auth/calendar",
+    "https://www.googleapis.com/auth/calendar.calendarlist",
+  ]);
   return google.calendar({ version: "v3", auth: client });
 }
 
