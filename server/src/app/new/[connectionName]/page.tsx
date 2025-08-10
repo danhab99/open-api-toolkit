@@ -19,9 +19,11 @@ export default async function Page({ params }: PageProps) {
   const tools = await getTools(connection.id);
 
   return (
-    <Frame title={`create ${connection.name.toLowerCase()} connection`}>
+    <Frame title={`create ${connection.displayName.toLowerCase()} connection`}>
       <hr />
-      <h1 className="text-2xl py-2">{connection.name}</h1>
+      <h1 className="text-2xl py-2">
+        {connection.displayName} ({connection.id})
+      </h1>
       <p className="text-gray-500 pb-4">{connection.userDescription}</p>
       <div className="flex flex-row">
         <div className="w-3/5">
@@ -34,10 +36,12 @@ export default async function Page({ params }: PageProps) {
               key={i}
               className="border border-gray-100 rounded-lg p-4 shadow ml-4 my-4"
             >
-              <h5 className="text-xs text-gray-500 underline leading-none overflow-none text-ellipsis align-middle">
+              <h6 className="text-gray-500 leading-none overflow-none text-ellipsis align-middle pb-2">
                 {tool.displayName}
-              </h5>
-              <p>{tool.userDescription}</p>
+                {" "}
+                <span className="text-xs pb-2 text-gray-600">({tool.id})</span>
+              </h6>
+              <p className="text-xs">{tool.userDescription}</p>
             </div>
           ))}
         </div>
