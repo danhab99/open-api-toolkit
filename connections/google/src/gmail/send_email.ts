@@ -4,7 +4,7 @@ import { encode as base64url } from "base64url";
 import { Tool } from "open-api-connection-types";
 import { getGmail } from "../lib";
 
-export const sendGmailMessageWithServiceAccount: Tool = {
+export const sendGmailMessage: Tool = {
   id: "sendGmailMessage",
   displayName: "Send Email",
   userDescription:

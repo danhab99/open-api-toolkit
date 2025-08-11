@@ -1,7 +1,7 @@
 import { Tool } from "open-api-connection-types";
 import { getCalendar } from "../lib";
 
-export const editGoogleCalendarEventWithServiceAccount: Tool = {
+export const editGoogleCalendarEvent: Tool = {
   id: "editGoogleCalendarEvent",
   displayName: "Edit Event",
   userDescription:

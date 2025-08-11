@@ -1,7 +1,7 @@
 import { Tool } from "open-api-connection-types";
 import { getGmail } from "../lib";
 
-export const listGmailMessagesWithServiceAccount: Tool = {
+export const listGmailMessages: Tool = {
   id: "listGmailMessages",
   displayName: "List emails",
   userDescription:

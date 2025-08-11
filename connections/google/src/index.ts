@@ -1,25 +1,25 @@
 import { OpenAPIConnectionDefinition } from "open-api-connection-types";
-import { createGoogleCalendarEventsWithServiceAccount } from "./calendar/create_calendar";
+import { createGoogleCalendarEvents } from "./calendar/create_calendar";
 import { createGoogleContact } from "./contacts/create_contact";
 import { createGoogleDriveFile } from "./drive/create_doc";
 import { createGoogleTask } from "./tasks/create_task";
-import { deleteGoogleCalendarEventWithServiceAccount } from "./calendar/delete_calendar";
+import { deleteGoogleCalendarEvent } from "./calendar/delete_calendar";
 import { deleteGoogleContact } from "./contacts/delete_contact";
 import { deleteGoogleDriveFile } from "./drive/delete_doc";
 import { deleteGoogleTask } from "./tasks/delete_task";
-import { editGoogleCalendarEventWithServiceAccount } from "./calendar/edit_calendar";
-import { getGmailThreadWithServiceAccount } from "./gmail/get_emails";
-import { listGmailMessagesWithServiceAccount } from "./gmail/list_gmail";
-import { listGoogleCalendarsWithServiceAccount } from "./calendar/list_calendars";
+import { editGoogleCalendarEvent } from "./calendar/edit_calendar";
+import { getGmailThread } from "./gmail/get_emails";
+import { listGmailMessages } from "./gmail/list_gmail";
+import { listGoogleCalendars } from "./calendar/list_calendars";
 import { listGoogleDriveFiles } from "./drive/list_drive";
 import { listGoogleTasks } from "./tasks/list_tasks";
 import { moveGoogleDriveFile } from "./drive/move_doc";
-import { searchGmailMessagesWithServiceAccount } from "./gmail/search_emails";
-import { sendGmailMessageWithServiceAccount } from "./gmail/send_email";
+import { searchGmailMessages } from "./gmail/search_emails";
+import { sendGmailMessage } from "./gmail/send_email";
 import { updateGoogleContact } from "./contacts/update_contact";
 import { updateGoogleDriveFile } from "./drive/update_doc";
 import { updateGoogleTask } from "./tasks/update_task";
-import { viewGoogleCalendarEventsWithServiceAccount } from "./calendar/view_calendar";
+import { viewGoogleCalendarEvents } from "./calendar/view_calendar";
 
 export const Connection: OpenAPIConnectionDefinition = {
   id: "google",
@@ -46,25 +46,25 @@ export const Connection: OpenAPIConnectionDefinition = {
 } as OpenAPIConnectionDefinition;
 
 export const Tools = [
-  createGoogleCalendarEventsWithServiceAccount,
+  createGoogleCalendarEvents,
   createGoogleContact,
   createGoogleDriveFile,
   createGoogleTask,
-  deleteGoogleCalendarEventWithServiceAccount,
+  deleteGoogleCalendarEvent,
   deleteGoogleContact,
   deleteGoogleDriveFile,
   deleteGoogleTask,
-  editGoogleCalendarEventWithServiceAccount,
-  getGmailThreadWithServiceAccount,
-  listGmailMessagesWithServiceAccount,
-  listGoogleCalendarsWithServiceAccount,
+  editGoogleCalendarEvent,
+  getGmailThread,
+  listGmailMessages,
+  listGoogleCalendars,
   listGoogleDriveFiles,
   listGoogleTasks,
   moveGoogleDriveFile,
-  searchGmailMessagesWithServiceAccount,
-  sendGmailMessageWithServiceAccount,
+  searchGmailMessages,
+  sendGmailMessage,
   updateGoogleContact,
   updateGoogleDriveFile,
   updateGoogleTask,
-  viewGoogleCalendarEventsWithServiceAccount,
+  viewGoogleCalendarEvents,
 ];

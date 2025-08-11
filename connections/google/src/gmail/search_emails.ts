@@ -3,7 +3,7 @@ import { JWT } from "google-auth-library";
 import { Tool } from "open-api-connection-types";
 import { getGmail } from "../lib";
 
-export const searchGmailMessagesWithServiceAccount: Tool = {
+export const searchGmailMessages: Tool = {
   id: "searchGmailMessages",
   displayName: "Search Emails",
   userDescription:

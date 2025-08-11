@@ -1,7 +1,7 @@
 import { Tool } from "open-api-connection-types";
 import { getCalendar } from "../lib";
 
-export const createGoogleCalendarEventsWithServiceAccount: Tool = {
+export const createGoogleCalendarEvents: Tool = {
   id: "createGoogleCalendarEvent",
   displayName: "Create calendar event",
   userDescription:
@@ -74,7 +74,6 @@ export const createGoogleCalendarEventsWithServiceAccount: Tool = {
     },
   ],
   async handler(config, args) {
-    const { calendarId, startDate, endDate, maxResults } = args;
     const calendar = getCalendar(config);
 
     try {
