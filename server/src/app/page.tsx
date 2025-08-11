@@ -15,7 +15,7 @@ export default async function Home() {
         </Link>
       }
     >
-      <ListMyConnections mcps={myConnections} />
+      <ListMyConnections connections={myConnections} />
     </Frame>
   );
 }
