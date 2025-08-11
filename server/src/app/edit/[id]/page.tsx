@@ -4,13 +4,15 @@ import { getMyConnection } from "@/lib/connection";
 import { notFound } from "next/navigation";
 
 type PageProps = {
-  id: number;
+  params: Promise<{
+    id: number;
+  }>
 };
 
-export default async function Page({ params }: Promise<PageProps>) {
+export default async function Page({ params }: PageProps) {
   const props = await params;
   const connection = await getMyConnection({
-    id: parseInt(props.id),
+    id: parseInt(props.id as any),
   });
 
   if (!connection) {
@@ -20,7 +22,7 @@ export default async function Page({ params }: Promise<PageProps>) {
 
   return (
     <>
-      <Frame title={`edit ${connection.name.toLowerCase()}`}>
+      <Frame title={`edit ${connection.displayName.toLowerCase()}`}>
         <CreateConnection connection={connection} />
       </Frame>
     </>

@@ -14,7 +14,7 @@ export function EditConnection(props: EditConnectionProps) {
 
   return (
     <>
-      <h1 className="text-2xl py-2">{props.mcp.name}</h1>
+      <h1 className="text-2xl py-2">{props.mcp.displayName}</h1>
       <p className="text-gray-500 pb-4">{props.mcp.userDescription}</p>
       {configs.map((config, i) => (
         <div key={i} className="w-full py-1">

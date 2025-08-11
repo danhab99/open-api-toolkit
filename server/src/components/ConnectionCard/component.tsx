@@ -37,7 +37,7 @@ export function ConnectionCard(props: ConnectionCardProps) {
             }}
             checked={enable}
           />
-          <CardTitle>{props.mcp.name}</CardTitle>
+          <CardTitle>{props.mcp.displayName}</CardTitle>
         </div>
         <CardDescription>{props.mcp.userDescription}</CardDescription>
       </CardHeader>
@@ -46,7 +46,7 @@ export function ConnectionCard(props: ConnectionCardProps) {
           <TableBody>
             {props.mcp.config.map((config, i) => (
               <TableRow key={i}>
-                <TableCell>{`${config.name}`}</TableCell>
+                <TableCell>{`${config.displayName}`}</TableCell>
                 <TableCell>{config.value}</TableCell>
               </TableRow>
             ))}

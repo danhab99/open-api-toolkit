@@ -57,7 +57,7 @@ export async function getMyConnection(
     config,
     aiDescription: connectionDB.aiDescription,
     userDescription: connectionDB.userDescription,
-    name: def.name,
+    displayName: def.displayName,
     enabled: connectionDB.enable,
   };
 }

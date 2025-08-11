@@ -20,7 +20,7 @@ export function NewConnectionCard(props: NewConnectionCardProps) {
     <>
       <Card>
         <CardHeader>
-          <CardTitle>{props.connection.name}</CardTitle>
+          <CardTitle>{props.connection.displayName}</CardTitle>
           <CardDescription>{props.connection.userDescription}</CardDescription>
         </CardHeader>
         <CardFooter className="flex justify-end gap-4">
