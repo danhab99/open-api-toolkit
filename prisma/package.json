@@ -9,5 +9,8 @@
   "dependencies": {
     "@prisma/client": "6.8.2",
     "prisma": "6.8.2"
+  },
+  "scripts": {
+    "build": "rm $DATABASE_PATH || yarn prisma generate && yarn prisma db push --force-reset && tsc"
   }
 }

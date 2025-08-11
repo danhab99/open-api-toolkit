@@ -22,6 +22,7 @@ model Connection {
   userDescription String
   aiDescription   String
   auditLog        AuditLog[]
+  displayName     String
 }
 
 model AuditLog {
