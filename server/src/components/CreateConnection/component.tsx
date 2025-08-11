@@ -34,11 +34,11 @@ export function CreateConnection(props: CreateConnectionProps) {
     const config: Config[] = conn.configurationArguments.map((x) => {
       return {
         ...x,
-        value: data.get(x.name)?.toString(),
+        value: data.get(x.displayName)?.toString(),
       } as Config;
     });
 
-    const name = data.get("Name")?.toString() ?? `${conn.name}`;
+    const displayName = data.get("Name")?.toString() ?? `${conn.displayName}`;
     const userDescription = data.get("Description")?.toString() ?? conn.userDescription;
     const aiDescription = data.get("Prompt")?.toString() ?? conn.aiDescription;
 
@@ -48,13 +48,13 @@ export function CreateConnection(props: CreateConnectionProps) {
         def: props.connectionDef,
         enabled: true,
         aiDescription,
-        name,
+        displayName,
         userDescription,
       });
     } else if ("connection" in props) {
       await editConnection(props.connection.slug, {
         aiDescription,
-        name,
+        displayName,
         userDescription,
         config,
       });
@@ -72,7 +72,7 @@ export function CreateConnection(props: CreateConnectionProps) {
       <Form action={handleSubmit}>
         <ConfigInput
           config={{
-            name: "Name",
+            displayName: "Name",
             type: "string",
             aiDescription: "",
             userDescription: "",
@@ -81,7 +81,7 @@ export function CreateConnection(props: CreateConnectionProps) {
 
         <ConfigInput
           config={{
-            name: "Description",
+            displayName: "Description",
             type: "string",
             aiDescription: "",
             userDescription: "",
@@ -90,7 +90,7 @@ export function CreateConnection(props: CreateConnectionProps) {
 
         <ConfigInput
           config={{
-            name: "Prompt",
+            displayName: "Prompt",
             type: "string",
             aiDescription: "",
             userDescription: "Instructions for the LLM",

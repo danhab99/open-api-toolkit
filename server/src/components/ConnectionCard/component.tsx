@@ -19,7 +19,7 @@ import Link from "next/link";
 
 export type ConnectionCardProps = {
   enable: boolean;
-  mcp: OpenAPIConnection;
+  connection: OpenAPIConnection;
 };
 
 export function ConnectionCard(props: ConnectionCardProps) {
@@ -32,19 +32,19 @@ export function ConnectionCard(props: ConnectionCardProps) {
         <div className="flex flex-row align-center gap-4">
           <Switch
             onCheckedChange={async (c) => {
-              await enableConnection(props.mcp.def.id, c);
+              await enableConnection(props.connection.def.id, c);
               setEnable((x) => !x);
             }}
             checked={enable}
           />
-          <CardTitle>{props.mcp.displayName}</CardTitle>
+          <CardTitle>{props.connection.displayName}</CardTitle>
         </div>
-        <CardDescription>{props.mcp.userDescription}</CardDescription>
+        <CardDescription>{props.connection.userDescription}</CardDescription>
       </CardHeader>
       <CardContent>
         <Table>
           <TableBody>
-            {props.mcp.config.map((config, i) => (
+            {props.connection.config.map((config, i) => (
               <TableRow key={i}>
                 <TableCell>{`${config.displayName}`}</TableCell>
                 <TableCell>{config.value}</TableCell>
@@ -57,13 +57,13 @@ export function ConnectionCard(props: ConnectionCardProps) {
         <Button
           variant="outline"
           onClick={async () => {
-            await deleteConnection(props.mcp.slug);
+            await deleteConnection(props.connection.slug);
             router.refresh();
           }}
         >
           Delete
         </Button>
-        <Link href={`/edit/${props.mcp.id}`}>
+        <Link href={`/edit/${props.connection.id}`}>
           <Button>Edit</Button>
         </Link>
       </CardFooter>

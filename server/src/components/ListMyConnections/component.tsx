@@ -4,14 +4,14 @@ import { Grid } from "../Grid";
 import { ConnectionCard } from "../ConnectionCard";
 
 export type ListMyConnectionsProps = {
-  mcps: OpenAPIConnection[];
+  connections: OpenAPIConnection[];
 };
 
 export function ListMyConnections(props: ListMyConnectionsProps) {
   return (
     <Grid key={null}>
-      {props.mcps.map((mcp, i) => (
-        <ConnectionCard enable mcp={mcp} key={i} />
+      {props.connections.map((connecion, i) => (
+        <ConnectionCard enable connection={connecion} key={i} />
       ))}
     </Grid>
   );
