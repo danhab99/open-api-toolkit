@@ -1,7 +1,7 @@
 server/.next
 server/lib/generated/prisma
-server/node_modules
 server/prisma/db
-**/node_modules
+node_modules
 prisma/lib/generated/prisma
 db
+prisma/dist/index.js
