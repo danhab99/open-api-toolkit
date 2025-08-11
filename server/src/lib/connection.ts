@@ -95,6 +95,7 @@ export async function createConnection(
       config: JSON.stringify(conn.config),
       enable: true,
       userDescription: conn.userDescription,
+      displayName: conn.displayName,
     },
     select: {
       id: true,
