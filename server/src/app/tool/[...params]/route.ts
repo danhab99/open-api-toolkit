@@ -1,7 +1,8 @@
 import { executeToolCall } from "@/lib/tool";
+import { constructNow } from "date-fns";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+async function handler(req: NextRequest) {
   const url = new URL(req.url);
 
   const [, , id, toolName] = url.pathname.split("/");
@@ -20,18 +21,22 @@ export async function POST(req: NextRequest) {
       },
     });
   } catch (e) {
-    return new NextResponse(
-      JSON.stringify({
-        err: e,
-        connectionId: id,
-      }),
-      {
-        status: 400,
-        statusText: `tool ${id}/${toolName} threw an error`,
-        headers: {
-          "Content-Type": "application/json",
-        },
+    const err = {
+      err: e,
+      connectionId: id,
+    };
+    console.error("Tool failed to run", err);
+    return new NextResponse(JSON.stringify(err), {
+      status: 400,
+      statusText: `tool ${id}/${toolName} threw an error`,
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+    });
   }
 }
+
+export const POST = handler;
+export const GET = handler;
+export const OPTIONS = handler;
+export const DELETE = handler;
