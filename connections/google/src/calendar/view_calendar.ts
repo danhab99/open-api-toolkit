@@ -1,5 +1,5 @@
 import { Tool } from "open-api-connection-types";
-import { getCalendar } from "../lib";
+import { getThisCalendar } from "../lib";
 
 export const viewGoogleCalendarEvents: Tool = {
   id: "viewGoogleCalendarEvents",
@@ -40,8 +40,9 @@ export const viewGoogleCalendarEvents: Tool = {
     },
   ],
   async handler(config, args) {
-    const { calendarId, startDate, endDate, maxResults } = args;
-    const calendar = getCalendar(config);
+    console.log({ config, args });
+    const { startDate, endDate, maxResults } = args;
+    const { calendar, calendarId } = await getThisCalendar(config, args);
 
     try {
       const res = await calendar.events.list({

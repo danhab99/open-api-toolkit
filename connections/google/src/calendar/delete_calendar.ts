@@ -1,5 +1,5 @@
 import { Tool } from "open-api-connection-types";
-import { getCalendar } from "../lib";
+import { getThisCalendar } from "../lib";
 
 export const deleteGoogleCalendarEvent: Tool = {
   id: "deleteGoogleCalendarEventWith",
@@ -27,8 +27,8 @@ export const deleteGoogleCalendarEvent: Tool = {
     },
   ],
   async handler(config, args) {
-    const { calendarId, eventId } = args;
-    const calendar = getCalendar(config);
+    const { eventId } = args;
+    const { calendar, calendarId } = await getThisCalendar(config, args);
 
     try {
       await calendar.events.delete({

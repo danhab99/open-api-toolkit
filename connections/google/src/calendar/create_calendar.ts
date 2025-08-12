@@ -1,11 +1,10 @@
 import { Tool } from "open-api-connection-types";
-import { getCalendar } from "../lib";
+import { getThisCalendar } from "../lib";
 
 export const createGoogleCalendarEvents: Tool = {
   id: "createGoogleCalendarEvent",
   displayName: "Create calendar event",
-  userDescription:
-    "create event on a Google Calendar using a service account.",
+  userDescription: "create event on a Google Calendar using a service account.",
   aiDescription:
     "Create calendar event using a configured Google service account on a specific calendar.",
   arguments: [
@@ -74,11 +73,11 @@ export const createGoogleCalendarEvents: Tool = {
     },
   ],
   async handler(config, args) {
-    const calendar = getCalendar(config);
+    const { calendar, calendarId } = await getThisCalendar(config, args);
 
     try {
       const res = await calendar.events.insert({
-        calendarId: args.calendarId,
+        calendarId: calendarId,
         requestBody: {
           description: args.description,
           end: args.endDate,

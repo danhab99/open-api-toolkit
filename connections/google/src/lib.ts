@@ -34,6 +34,17 @@ export function getCalendar(config: KVP) {
   return google.calendar({ version: "v3", auth: client });
 }
 
+export async function getThisCalendar(config: KVP, args: KVP) {
+  const calendar = getCalendar(config);
+  var calendarId = args.calendarId;
+  if (calendarId) {
+    const calendars = await calendar.calendarList.list({});
+    calendarId = calendars.data.items?.[0].id;
+  }
+
+  return { calendar, calendarId };
+}
+
 export function getPeople(config: KVP) {
   const auth = getJWT(config, ["https://www.googleapis.com/auth/contacts"]);
   return google.people({ version: "v1", auth });
