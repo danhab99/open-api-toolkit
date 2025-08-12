@@ -1,5 +1,5 @@
 import { Tool } from "open-api-connection-types";
-import { getTasks } from "../lib";
+import { getTaskList } from "../lib";
 
 export const updateGoogleTask: Tool = {
   id: "updateGoogleTask",
@@ -46,8 +46,8 @@ export const updateGoogleTask: Tool = {
     },
   ],
   async handler(config, args) {
-    const { tasklistId, taskId, title, notes, due } = args;
-    const tasks = getTasks(config);
+    const { taskId, title, notes, due } = args;
+    const { tasks, tasklistId } = await getTaskList(config, args);
 
     try {
       const res = await tasks.tasks.update({

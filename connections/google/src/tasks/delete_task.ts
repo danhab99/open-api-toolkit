@@ -1,5 +1,5 @@
 import { Tool } from "open-api-connection-types";
-import { getTasks } from "../lib";
+import { getTaskList } from "../lib";
 
 export const deleteGoogleTask: Tool = {
   id: "deleteGoogleTask",
@@ -23,8 +23,8 @@ export const deleteGoogleTask: Tool = {
     },
   ],
   async handler(config, args) {
-    const { tasklistId, taskId } = args;
-    const tasks = getTasks(config);
+    const { taskId } = args;
+    const { tasks, tasklistId } = await getTaskList(config, args);
 
     try {
       await tasks.tasks.delete({

@@ -13,6 +13,7 @@ export function getJWT(
   try {
     credentials = JSON.parse(serviceAccountJson);
   } catch (e) {
+    console.log("unable to decode credentials", { e, serviceAccountJson });
     throw e;
   }
 
@@ -66,4 +67,17 @@ export function getGmail(config: KVP) {
 export function getTasks(config: KVP) {
   const auth = getJWT(config, ["https://www.googleapis.com/auth/tasks"]);
   return google.tasks({ version: "v1", auth });
+}
+
+export async function getTaskList(config: KVP, args: KVP) {
+  let { tasklistId } = args;
+
+  const tasks = getTasks(config);
+
+  if (!tasklistId) {
+    const x = await tasks.tasklists.list({});
+    tasklistId = x.data.items?.[0].id;
+  }
+
+  return { tasks, tasklistId };
 }
