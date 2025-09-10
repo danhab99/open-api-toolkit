@@ -848,8 +848,8 @@
   dependencies:
     google-auth-library "^9.15.1"
     googleapis "^149.0.0"
-    open-api-connection-types "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-a6919604-0da6-4276-ae73-d8b5c63d8907-1749268079198/node_modules/types"
-    open-api-prisma "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-a6919604-0da6-4276-ae73-d8b5c63d8907-1749268079198/node_modules/prisma"
+    open-api-connection-types "link:../types"
+    open-api-prisma "link:../prisma"
     typescript "^5.8.3"
 
 "@pkgjs/parseargs@^0.11.0":
@@ -4741,12 +4741,10 @@ object.values@^1.1.6, object.values@^1.2.0, object.values@^1.2.1:
     es-object-atoms "^1.0.0"
 
 "open-api-connection-types@link:../types":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
 
 "open-api-connector-types@link:../types":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
 
 "open-api-db@file:../prisma":
   version "1.0.0"
@@ -4755,8 +4753,10 @@ object.values@^1.1.6, object.values@^1.2.0, object.values@^1.2.1:
     prisma "6.8.2"
 
 "open-api-prisma@link:../prisma":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
+  dependencies:
+    "@prisma/client" "6.8.2"
+    prisma "6.8.2"
 
 open@^8.0.4:
   version "8.4.2"
@@ -6118,9 +6118,9 @@ vite-plugin-storybook-nextjs@^1.1.5:
     ts-dedent "^2.2.0"
 
 "vite@^5.0.0 || ^6.0.0":
-  version "6.3.5"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-6.3.5.tgz#fec73879013c9c0128c8d284504c6d19410d12a3"
-  integrity sha512-cZn6NDFE7wdTpINgs++ZJ4N49W2vRp8LCKrn3Ob1kYNtOo21vfDoaV5GzBfLU4MovSAB8uNRm4jgzVQZ+mBzPQ==
+  version "6.3.6"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-6.3.6.tgz#69a976b64930750d40219fbc68c5200874d315c1"
+  integrity sha512-0msEVHJEScQbhkbVTb/4iHZdJ6SXp/AvxL2sjwYQFfBqleHtnCqv1J3sa9zbWz/6kW1m9Tfzn92vW+kZ1WV6QA==
   dependencies:
     esbuild "^0.25.0"
     fdir "^6.4.4"
