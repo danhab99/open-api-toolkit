@@ -1,5 +1,6 @@
 import { Tool } from "open-api-connection-types";
 import { getThisCalendar } from "../lib";
+import { calendar_v3 } from "googleapis";
 
 export const viewGoogleCalendarEvents: Tool = {
   id: "viewGoogleCalendarEvents",
@@ -45,18 +46,49 @@ export const viewGoogleCalendarEvents: Tool = {
     const { calendar, calendarId } = await getThisCalendar(config, args);
 
     try {
-      const res = await calendar.events.list({
-        calendarId,
-        timeMin: startDate,
-        timeMax: endDate,
-        maxResults: maxResults ?? 10,
-        singleEvents: true,
-        orderBy: "startTime",
-      });
+      let events: calendar_v3.Schema$Event[] = [];
+
+      if ((calendarId as string).length > 0) {
+        const res = await calendar.events.list({
+          calendarId: args.id,
+          timeMin: startDate,
+          timeMax: endDate,
+          maxResults: maxResults ?? 10,
+          singleEvents: true,
+          orderBy: "startTime",
+        });
+
+        events = res.data.items ?? [];
+      } else {
+        const list = await calendar.calendarList.list();
+        console.log("Listing all calendars", list.data.items);
+
+        if (list.data.items) {
+          const eventLists = await Promise.all(
+            list.data.items
+              .filter((x) => x.id)
+              .map((item) =>
+                calendar.events.list({
+                  calendarId: item.id!,
+                  timeMin: startDate,
+                  timeMax: endDate,
+                  maxResults: maxResults ?? 10,
+                  singleEvents: true,
+                  orderBy: "startTime",
+                }),
+              ),
+          );
+
+          events = eventLists
+            .map((x) => x.data.items)
+            .filter((x) => Array.isArray(x))
+            .flat();
+        }
+      }
 
       return {
         results: {
-          events: (res.data.items || []).map((e) => ({
+          events: events.map((e) => ({
             id: e.id,
             summary: e.summary,
             start: e.start?.dateTime ?? e.start?.date,
@@ -66,7 +98,7 @@ export const viewGoogleCalendarEvents: Tool = {
           })),
         },
         log: {
-          message: `Fetched ${res.data.items?.length || 0} events.`,
+          message: `Fetched ${events.length} events.`,
         },
       };
     } catch (error) {
