@@ -848,8 +848,8 @@
   dependencies:
     google-auth-library "^9.15.1"
     googleapis "^149.0.0"
-    open-api-connection-types "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-a6919604-0da6-4276-ae73-d8b5c63d8907-1749268079198/node_modules/types"
-    open-api-prisma "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-a6919604-0da6-4276-ae73-d8b5c63d8907-1749268079198/node_modules/prisma"
+    open-api-connection-types "link:../types"
+    open-api-prisma "link:../prisma"
     typescript "^5.8.3"
 
 "@pkgjs/parseargs@^0.11.0":
@@ -4741,12 +4741,10 @@ object.values@^1.1.6, object.values@^1.2.0, object.values@^1.2.1:
     es-object-atoms "^1.0.0"
 
 "open-api-connection-types@link:../types":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
 
 "open-api-connector-types@link:../types":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
 
 "open-api-db@file:../prisma":
   version "1.0.0"
@@ -4755,8 +4753,10 @@ object.values@^1.1.6, object.values@^1.2.0, object.values@^1.2.1:
     prisma "6.8.2"
 
 "open-api-prisma@link:../prisma":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
+  dependencies:
+    "@prisma/client" "6.8.2"
+    prisma "6.8.2"
 
 open@^8.0.4:
   version "8.4.2"
@@ -4872,17 +4872,17 @@ pirates@^4.0.1:
   resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.7.tgz#643b4a18c4257c8a65104b73f3049ce9a0a15e22"
   integrity sha512-TfySrs/5nm8fQJDcBDuUng3VOUKsd7S+zqvbOTiGXHfxX4wK31ard+hoNuvkicM/2YFzlpDgABOevKSsB4G/FA==
 
-playwright-core@1.52.0:
-  version "1.52.0"
-  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.52.0.tgz#238f1f0c3edd4ebba0434ce3f4401900319a3dca"
-  integrity sha512-l2osTgLXSMeuLZOML9qYODUQoPPnUsKsb5/P6LJ2e6uPKXUdPK5WYhN4z03G+YNbWmGDY4YENauNu4ZKczreHg==
+playwright-core@1.55.1:
+  version "1.55.1"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.55.1.tgz#5d3bb1846bc4289d364ea1a9dcb33f14545802e9"
+  integrity sha512-Z6Mh9mkwX+zxSlHqdr5AOcJnfp+xUWLCt9uKV18fhzA8eyxUd8NUWzAjxUh55RZKSYwDGX0cfaySdhZJGMoJ+w==
 
-playwright@^1.52.0:
-  version "1.52.0"
-  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.52.0.tgz#26cb9a63346651e1c54c8805acfd85683173d4bd"
-  integrity sha512-JAwMNMBlxJ2oD1kce4KPtMkDeKGHQstdpFPcPH3maElAXon/QZeTvtsfXmTMRyO9TslfoYOXkSsvao2nE1ilTw==
+playwright@^1.55.1:
+  version "1.55.1"
+  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.55.1.tgz#8a9954e9e61ed1ab479212af9be336888f8b3f0e"
+  integrity sha512-cJW4Xd/G3v5ovXtJJ52MAOclqeac9S/aGGgRzLabuF8TnIb6xHvMzKIa6JmrRzUkeXJgfL1MhukP0NK6l39h3A==
   dependencies:
-    playwright-core "1.52.0"
+    playwright-core "1.55.1"
   optionalDependencies:
     fsevents "2.3.2"
 
