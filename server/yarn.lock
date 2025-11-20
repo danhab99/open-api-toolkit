@@ -848,8 +848,8 @@
   dependencies:
     google-auth-library "^9.15.1"
     googleapis "^149.0.0"
-    open-api-connection-types "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-a6919604-0da6-4276-ae73-d8b5c63d8907-1749268079198/node_modules/types"
-    open-api-prisma "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-a6919604-0da6-4276-ae73-d8b5c63d8907-1749268079198/node_modules/prisma"
+    open-api-connection-types "link:../types"
+    open-api-prisma "link:../prisma"
     typescript "^5.8.3"
 
 "@pkgjs/parseargs@^0.11.0":
@@ -3804,9 +3804,9 @@ glob-parent@^6.0.2:
     is-glob "^4.0.3"
 
 glob@^10.0.0, glob@^10.3.10, glob@^10.4.1:
-  version "10.4.5"
-  resolved "https://registry.yarnpkg.com/glob/-/glob-10.4.5.tgz#f4d9f0b90ffdbab09c9d77f5f29b4262517b0956"
-  integrity sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==
+  version "10.5.0"
+  resolved "https://registry.yarnpkg.com/glob/-/glob-10.5.0.tgz#8ec0355919cd3338c28428a23d4f24ecc5fe738c"
+  integrity sha512-DfXN8DfhJ7NH3Oe7cFmu3NCu1wKbkReJ8TorzSAFbSKrlNaQSKfIzqYqVY8zlbs2NLBbWpRiU52GX2PbaBVNkg==
   dependencies:
     foreground-child "^3.1.0"
     jackspeak "^3.1.2"
@@ -4741,12 +4741,10 @@ object.values@^1.1.6, object.values@^1.2.0, object.values@^1.2.1:
     es-object-atoms "^1.0.0"
 
 "open-api-connection-types@link:../types":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
 
 "open-api-connector-types@link:../types":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
 
 "open-api-db@file:../prisma":
   version "1.0.0"
@@ -4755,8 +4753,10 @@ object.values@^1.1.6, object.values@^1.2.0, object.values@^1.2.1:
     prisma "6.8.2"
 
 "open-api-prisma@link:../prisma":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
+  dependencies:
+    "@prisma/client" "6.8.2"
+    prisma "6.8.2"
 
 open@^8.0.4:
   version "8.4.2"
