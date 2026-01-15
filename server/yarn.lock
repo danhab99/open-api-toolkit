@@ -848,8 +848,8 @@
   dependencies:
     google-auth-library "^9.15.1"
     googleapis "^149.0.0"
-    open-api-connection-types "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-a6919604-0da6-4276-ae73-d8b5c63d8907-1749268079198/node_modules/types"
-    open-api-prisma "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-a6919604-0da6-4276-ae73-d8b5c63d8907-1749268079198/node_modules/prisma"
+    open-api-connection-types "link:../types"
+    open-api-prisma "link:../prisma"
     typescript "^5.8.3"
 
 "@pkgjs/parseargs@^0.11.0":
@@ -4310,9 +4310,9 @@ jiti@^1.21.6:
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
 js-yaml@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.1.0.tgz#c1fb65f8f5017901cdd2c951864ba18458a10602"
-  integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.1.1.tgz#854c292467705b699476e1a2decc0c8a3458806b"
+  integrity sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==
   dependencies:
     argparse "^2.0.1"
 
@@ -4741,12 +4741,10 @@ object.values@^1.1.6, object.values@^1.2.0, object.values@^1.2.1:
     es-object-atoms "^1.0.0"
 
 "open-api-connection-types@link:../types":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
 
 "open-api-connector-types@link:../types":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
 
 "open-api-db@file:../prisma":
   version "1.0.0"
@@ -4755,8 +4753,10 @@ object.values@^1.1.6, object.values@^1.2.0, object.values@^1.2.1:
     prisma "6.8.2"
 
 "open-api-prisma@link:../prisma":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
+  dependencies:
+    "@prisma/client" "6.8.2"
+    prisma "6.8.2"
 
 open@^8.0.4:
   version "8.4.2"
