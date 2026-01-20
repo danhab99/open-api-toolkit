@@ -6,8 +6,8 @@
   "dependencies": {
     "google-auth-library": "^9.15.1",
     "googleapis": "^149.0.0",
-    "open-api-connection-types": "link:../../types",
-    "open-api-prisma": "link:../../prisma",
+    "open-api-connection-types": "workspace:*",
+    "open-api-prisma": "workspace:*",
     "typescript": "^5.8.3"
   }
 }

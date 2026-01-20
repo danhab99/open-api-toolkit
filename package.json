@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "name": "open-api-toolkit",
+  "version": "1.0.0",
+  "workspaces": [
+    "server",
+    "prisma",
+    "connections/*",
+    "types"
+  ]
+}
