@@ -1,4 +1,4 @@
-import { Tool } from "open-api-connection-types";
+import { Tool, KVP } from "open-api-connection-types";
 import { getClient, mondayApiCall } from "../lib";
 
 export const updateMondayItem: Tool = {
@@ -30,7 +30,7 @@ export const updateMondayItem: Tool = {
       aiDescription: "JSON string containing column IDs and their new values.",
     },
   ],
-  async handler(config, args) {
+  async handler(config: KVP, args: KVP) {
     const { boardId, itemId, columnValues } = args;
     const client = getClient(config);
 

@@ -1,4 +1,4 @@
-import { Tool } from "open-api-connection-types";
+import { Tool, KVP } from "open-api-connection-types";
 import { getClient, mondayApiCall } from "../lib";
 
 export const listMondayItems: Tool = {
@@ -23,7 +23,7 @@ export const listMondayItems: Tool = {
       aiDescription: "Optional maximum number of items to retrieve.",
     },
   ],
-  async handler(config, args) {
+  async handler(config: KVP, args: KVP) {
     const { boardId, limit = 25 } = args;
     const client = getClient(config);
 

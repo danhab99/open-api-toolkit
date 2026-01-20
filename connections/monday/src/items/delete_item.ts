@@ -1,4 +1,4 @@
-import { Tool } from "open-api-connection-types";
+import { Tool, KVP } from "open-api-connection-types";
 import { getClient, mondayApiCall } from "../lib";
 
 export const deleteMondayItem: Tool = {
@@ -16,7 +16,7 @@ export const deleteMondayItem: Tool = {
       aiDescription: "The unique identifier of the item to delete.",
     },
   ],
-  async handler(config, args) {
+  async handler(config: KVP, args: KVP) {
     const { itemId } = args;
     const client = getClient(config);
 

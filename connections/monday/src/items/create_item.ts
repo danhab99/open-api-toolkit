@@ -1,4 +1,4 @@
-import { Tool } from "open-api-connection-types";
+import { Tool, KVP } from "open-api-connection-types";
 import { getClient, mondayApiCall } from "../lib";
 
 export const createMondayItem: Tool = {
@@ -30,7 +30,7 @@ export const createMondayItem: Tool = {
       aiDescription: "Optional JSON string containing column IDs and their values to set on the new item.",
     },
   ],
-  async handler(config, args) {
+  async handler(config: KVP, args: KVP) {
     const { boardId, itemName, columnValues } = args;
     const client = getClient(config);
 
