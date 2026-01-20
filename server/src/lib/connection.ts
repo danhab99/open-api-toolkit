@@ -9,11 +9,15 @@ import {
   Connection as GoogleConnection,
   Tools as GoogleTools,
 } from "@open-api-connection/google";
+import {
+  Connection as RSSConnection,
+  Tools as RSSTools,
+} from "@open-api-connection/rss";
 
 const CONNECTIONS_PER_PAGE = 20;
 
 export async function getAllConnections() {
-  const Connections: OpenAPIConnectionDefinition[] = [GoogleConnection];
+  const Connections: OpenAPIConnectionDefinition[] = [GoogleConnection, RSSConnection];
 
   return Connections;
 }
@@ -29,6 +33,7 @@ export async function importConnection(id: string) {
 export async function getTools(id: string) {
   const Tools = {
     [GoogleConnection.id]: GoogleTools,
+    [RSSConnection.id]: RSSTools,
   };
 
   return Tools[id];
