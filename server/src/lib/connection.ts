@@ -14,11 +14,25 @@ import {
   Tools as MondayTools,
 } from "@open-api-connection/monday";
 
+import {
+  Connection as JiraConnection,
+  Tools as JiraTools,
+} from "@open-api-connection/jira";
+import { 
+  Connection as RSSConnection,
+  Tools as RSSTools,
+} from "@open-api-connection/rss";
+
+
 const CONNECTIONS_PER_PAGE = 20;
 
 export async function getAllConnections() {
-  const Connections: OpenAPIConnectionDefinition[] = [GoogleConnection, MondayConnection];
-
+  const Connections: OpenAPIConnectionDefinition[] = [
+    GoogleConnection,
+    RSSConnection,
+    JiraConnection,
+    MondayConnection,
+  ];
   return Connections;
 }
 
@@ -34,6 +48,8 @@ export async function getTools(id: string) {
   const Tools = {
     [GoogleConnection.id]: GoogleTools,
     [MondayConnection.id]: MondayTools,
+    [JiraConnection.id]: JiraTools,
+    [RSSConnection.id]: RSSTools,
   };
 
   return Tools[id];

@@ -4,4 +4,6 @@ server/prisma/db
 node_modules
 prisma/lib/generated/prisma
 db
+db-journal
+**/db-journal
 prisma/dist/index.js
