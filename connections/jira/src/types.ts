@@ -33,9 +33,22 @@ export interface JiraProject {
   name: string;
 }
 
+// Atlassian Document Format (ADF) - simplified
+export interface JiraADF {
+  type: string;
+  version: number;
+  content: Array<{
+    type: string;
+    content: Array<{
+      type: string;
+      text: string;
+    }>;
+  }>;
+}
+
 export interface JiraIssueFields {
   summary: string;
-  description?: any;
+  description?: string | JiraADF;
   status?: JiraStatus;
   assignee?: JiraUser;
   reporter?: JiraUser;
@@ -44,7 +57,7 @@ export interface JiraIssueFields {
   project?: JiraProject;
   created?: string;
   updated?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface JiraIssue {
@@ -58,7 +71,7 @@ export interface JiraComment {
   id: string;
   self: string;
   author?: JiraUser;
-  body: any;
+  body: string | JiraADF;
   created: string;
   updated?: string;
 }
@@ -86,21 +99,26 @@ export interface JiraCreateIssueResponse {
   self: string;
 }
 
-export interface JiraIssueUpdateFields {
-  summary?: string;
-  description?: {
-    type: string;
-    version: number;
-    content: Array<{
-      type: string;
-      content: Array<{
-        type: string;
-        text: string;
-      }>;
-    }>;
+export interface JiraCreateIssueFields {
+  project: {
+    key: string;
+  };
+  summary: string;
+  description?: JiraADF;
+  issuetype: {
+    name: string;
   };
   priority?: {
     name: string;
   };
-  [key: string]: any;
+  [key: string]: unknown;
+}
+
+export interface JiraIssueUpdateFields {
+  summary?: string;
+  description?: JiraADF;
+  priority?: {
+    name: string;
+  };
+  [key: string]: unknown;
 }

@@ -1,6 +1,6 @@
 import { Tool } from "open-api-connection-types";
 import { getJiraConfig, jiraRequest } from "../lib";
-import { JiraIssueUpdateFields } from "../types";
+import { JiraIssueUpdateFields, JiraADF } from "../types";
 
 export const updateJiraIssue: Tool = {
   id: "updateJiraIssue",
@@ -65,7 +65,7 @@ export const updateJiraIssue: Tool = {
               ],
             },
           ],
-        };
+        } as JiraADF;
       }
 
       if (priority) {

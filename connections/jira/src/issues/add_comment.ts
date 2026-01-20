@@ -1,6 +1,6 @@
 import { Tool } from "open-api-connection-types";
 import { getJiraConfig, jiraRequest } from "../lib";
-import { JiraComment } from "../types";
+import { JiraComment, JiraADF } from "../types";
 
 export const addJiraComment: Tool = {
   id: "addJiraComment",
@@ -48,7 +48,7 @@ export const addJiraComment: Tool = {
                   ],
                 },
               ],
-            },
+            } as JiraADF,
           }),
         },
       );

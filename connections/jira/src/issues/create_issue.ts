@@ -1,6 +1,6 @@
 import { Tool } from "open-api-connection-types";
 import { getJiraConfig, jiraRequest } from "../lib";
-import { JiraCreateIssueResponse, JiraIssueUpdateFields } from "../types";
+import { JiraCreateIssueResponse, JiraCreateIssueFields, JiraADF } from "../types";
 
 export const createJiraIssue: Tool = {
   id: "createJiraIssue",
@@ -58,7 +58,7 @@ export const createJiraIssue: Tool = {
     } = args;
 
     try {
-      const fields: JiraIssueUpdateFields = {
+      const fields: JiraCreateIssueFields = {
         project: {
           key: projectKey,
         },
@@ -77,7 +77,7 @@ export const createJiraIssue: Tool = {
               ],
             },
           ],
-        },
+        } as JiraADF,
         issuetype: {
           name: issueType,
         },
