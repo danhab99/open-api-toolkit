@@ -848,33 +848,29 @@
   dependencies:
     google-auth-library "^9.15.1"
     googleapis "^149.0.0"
-    open-api-connection-types "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-fc649976-5797-45e7-bc8b-1174c7437e26-1768894142377/node_modules/types"
-    open-api-prisma "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-fc649976-5797-45e7-bc8b-1174c7437e26-1768894142377/node_modules/prisma"
-    typescript "^5.8.3"
-
-"@open-api-connection/monday@file:../connections/monday":
-  version "1.0.0"
-  dependencies:
-    open-api-connection-types "link:../../../../.cache/yarn/v6/npm-@open-api-connection-monday-1.0.0-b48095d8-6761-4586-8d2f-bf245892c088-1768894142397/node_modules/types"
-    open-api-prisma "link:../../../../.cache/yarn/v6/npm-@open-api-connection-monday-1.0.0-b48095d8-6761-4586-8d2f-bf245892c088-1768894142397/node_modules/prisma"
-    open-api-connection-types "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-874d6e82-5783-4c78-9a0c-7f35b5d2c9c5-1768894130563/node_modules/types"
-    open-api-prisma "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-874d6e82-5783-4c78-9a0c-7f35b5d2c9c5-1768894130563/node_modules/prisma"
+    open-api-connection-types "link:../types"
+    open-api-prisma "link:../prisma"
     typescript "^5.8.3"
 
 "@open-api-connection/jira@file:../connections/jira":
   version "1.0.0"
   dependencies:
-    open-api-connection-types "link:../../../../.cache/yarn/v6/npm-@open-api-connection-jira-1.0.0-fb8155af-cbaf-48f1-8bce-89a24ffdc9e8-1768894130583/node_modules/types"
-    open-api-prisma "link:../../../../.cache/yarn/v6/npm-@open-api-connection-jira-1.0.0-fb8155af-cbaf-48f1-8bce-89a24ffdc9e8-1768894130583/node_modules/prisma"
-    open-api-connection-types "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-8c21045d-0a8b-48d5-883b-1a4e4481071e-1768894149543/node_modules/types"
-    open-api-prisma "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-8c21045d-0a8b-48d5-883b-1a4e4481071e-1768894149543/node_modules/prisma"
+    open-api-connection-types "link:../types"
+    open-api-prisma "link:../prisma"
+    typescript "^5.8.3"
+
+"@open-api-connection/monday@file:../connections/monday":
+  version "1.0.0"
+  dependencies:
+    open-api-connection-types "link:../types"
+    open-api-prisma "link:../prisma"
     typescript "^5.8.3"
 
 "@open-api-connection/rss@file:../connections/rss":
   version "1.0.0"
   dependencies:
-    open-api-connection-types "link:../../../../.cache/yarn/v6/npm-@open-api-connection-rss-1.0.0-39825cb4-7725-4f4f-8e8e-ba5edec5fb7c-1768894149563/node_modules/types"
-    open-api-prisma "link:../../../../.cache/yarn/v6/npm-@open-api-connection-rss-1.0.0-39825cb4-7725-4f4f-8e8e-ba5edec5fb7c-1768894149563/node_modules/prisma"
+    open-api-connection-types "link:../types"
+    open-api-prisma "link:../prisma"
     rss-parser "^3.13.0"
     typescript "^5.8.3"
 
@@ -4772,12 +4768,10 @@ object.values@^1.1.6, object.values@^1.2.0, object.values@^1.2.1:
     es-object-atoms "^1.0.0"
 
 "open-api-connection-types@link:../types":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
 
 "open-api-connector-types@link:../types":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
 
 "open-api-db@file:../prisma":
   version "1.0.0"
@@ -4786,8 +4780,10 @@ object.values@^1.1.6, object.values@^1.2.0, object.values@^1.2.1:
     prisma "6.8.2"
 
 "open-api-prisma@link:../prisma":
-  version "0.0.0"
-  uid ""
+  version "1.0.0"
+  dependencies:
+    "@prisma/client" "6.8.2"
+    prisma "6.8.2"
 
 open@^8.0.4:
   version "8.4.2"
@@ -5041,9 +5037,9 @@ punycode@^2.1.0:
   integrity sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==
 
 qs@^6.7.0:
-  version "6.14.0"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.14.0.tgz#c63fa40680d2c5c941412a0e899c89af60c0a930"
-  integrity sha512-YWWTjgABSKcvs/nWBi9PycY/JiPJqOD4JA6o9Sej2AtvSGarXxKC3OQSk4pAarbdQlKAh5D4FCQkJNkW+GAn3w==
+  version "6.14.1"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.14.1.tgz#a41d85b9d3902f31d27861790506294881871159"
+  integrity sha512-4EK3+xJl8Ts67nLYNwqw/dsFVnCf+qR7RgXSK9jEEm9unao3njwMDdmsdvoKBKHzxd7tCYz5e5M+SnMjdtXGQQ==
   dependencies:
     side-channel "^1.1.0"
 
