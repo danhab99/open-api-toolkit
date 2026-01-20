@@ -848,6 +848,15 @@
   dependencies:
     google-auth-library "^9.15.1"
     googleapis "^149.0.0"
+    open-api-connection-types "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-fc649976-5797-45e7-bc8b-1174c7437e26-1768894142377/node_modules/types"
+    open-api-prisma "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-fc649976-5797-45e7-bc8b-1174c7437e26-1768894142377/node_modules/prisma"
+    typescript "^5.8.3"
+
+"@open-api-connection/monday@file:../connections/monday":
+  version "1.0.0"
+  dependencies:
+    open-api-connection-types "link:../../../../.cache/yarn/v6/npm-@open-api-connection-monday-1.0.0-b48095d8-6761-4586-8d2f-bf245892c088-1768894142397/node_modules/types"
+    open-api-prisma "link:../../../../.cache/yarn/v6/npm-@open-api-connection-monday-1.0.0-b48095d8-6761-4586-8d2f-bf245892c088-1768894142397/node_modules/prisma"
     open-api-connection-types "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-874d6e82-5783-4c78-9a0c-7f35b5d2c9c5-1768894130563/node_modules/types"
     open-api-prisma "link:../../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-874d6e82-5783-4c78-9a0c-7f35b5d2c9c5-1768894130563/node_modules/prisma"
     typescript "^5.8.3"

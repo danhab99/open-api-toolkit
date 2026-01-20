@@ -9,6 +9,10 @@ import {
   Connection as GoogleConnection,
   Tools as GoogleTools,
 } from "@open-api-connection/google";
+import {
+  Connection as MondayConnection,
+  Tools as MondayTools,
+} from "@open-api-connection/monday";
 
 import {
   Connection as JiraConnection,
@@ -27,6 +31,7 @@ export async function getAllConnections() {
     GoogleConnection,
     RSSConnection,
     JiraConnection,
+    MondayConnection,
   ];
   return Connections;
 }
@@ -42,6 +47,7 @@ export async function importConnection(id: string) {
 export async function getTools(id: string) {
   const Tools = {
     [GoogleConnection.id]: GoogleTools,
+    [MondayConnection.id]: MondayTools,
     [JiraConnection.id]: JiraTools,
     [RSSConnection.id]: RSSTools,
   };

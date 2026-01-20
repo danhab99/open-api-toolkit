@@ -1,0 +1,11 @@
+{
+  "name": "@open-api-connection/monday",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "open-api-connection-types": "link:../../types",
+    "open-api-prisma": "link:../../prisma",
+    "typescript": "^5.8.3"
+  }
+}
