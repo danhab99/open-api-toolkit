@@ -51,9 +51,32 @@ export const listMondayItems: Tool = {
         }
       `;
 
+      const parsedBoardId = parseInt(boardId);
+      const parsedLimit = typeof limit === 'number' ? limit : parseInt(limit.toString());
+
+      if (!parsedBoardId || isNaN(parsedBoardId)) {
+        return {
+          results: { success: false },
+          log: {
+            message: "Invalid board ID - must be a valid number",
+            data: { boardId },
+          },
+        };
+      }
+
+      if (isNaN(parsedLimit)) {
+        return {
+          results: { success: false },
+          log: {
+            message: "Invalid limit - must be a valid number",
+            data: { limit },
+          },
+        };
+      }
+
       const variables = {
-        boardId: [parseInt(boardId)],
-        limit: parseInt(limit),
+        boardId: [parsedBoardId],
+        limit: parsedLimit,
       };
 
       const data = await mondayApiCall(client, query, variables);

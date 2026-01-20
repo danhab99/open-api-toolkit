@@ -55,7 +55,7 @@ export const updateMondayItem: Tool = {
 
       let parsedColumnValues;
       try {
-        parsedColumnValues = JSON.stringify(JSON.parse(columnValues));
+        parsedColumnValues = JSON.parse(columnValues);
       } catch (e) {
         return {
           results: { success: false },
@@ -66,10 +66,33 @@ export const updateMondayItem: Tool = {
         };
       }
 
+      const parsedBoardId = parseInt(boardId);
+      const parsedItemId = parseInt(itemId);
+
+      if (!parsedBoardId || isNaN(parsedBoardId)) {
+        return {
+          results: { success: false },
+          log: {
+            message: "Invalid board ID - must be a valid number",
+            data: { boardId },
+          },
+        };
+      }
+
+      if (!parsedItemId || isNaN(parsedItemId)) {
+        return {
+          results: { success: false },
+          log: {
+            message: "Invalid item ID - must be a valid number",
+            data: { itemId },
+          },
+        };
+      }
+
       const variables = {
-        boardId: parseInt(boardId),
-        itemId: parseInt(itemId),
-        columnValues: parsedColumnValues,
+        boardId: parsedBoardId,
+        itemId: parsedItemId,
+        columnValues: JSON.stringify(parsedColumnValues),
       };
 
       const data = await mondayApiCall(client, query, variables);

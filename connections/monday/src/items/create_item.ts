@@ -57,6 +57,16 @@ export const createMondayItem: Tool = {
         itemName,
       };
 
+      if (!variables.boardId || isNaN(variables.boardId)) {
+        return {
+          results: { success: false },
+          log: {
+            message: "Invalid board ID - must be a valid number",
+            data: { boardId },
+          },
+        };
+      }
+
       if (columnValues) {
         try {
           variables.columnValues = JSON.stringify(JSON.parse(columnValues));

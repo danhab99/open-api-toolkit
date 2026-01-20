@@ -29,8 +29,20 @@ export const deleteMondayItem: Tool = {
         }
       `;
 
+      const parsedItemId = parseInt(itemId);
+
+      if (!parsedItemId || isNaN(parsedItemId)) {
+        return {
+          results: { success: false },
+          log: {
+            message: "Invalid item ID - must be a valid number",
+            data: { itemId },
+          },
+        };
+      }
+
       const variables = {
-        itemId: parseInt(itemId),
+        itemId: parsedItemId,
       };
 
       const data = await mondayApiCall(client, query, variables);
