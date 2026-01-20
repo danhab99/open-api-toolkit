@@ -1,5 +1,6 @@
 import { Tool } from "open-api-connection-types";
 import { getJiraConfig, jiraRequest } from "../lib";
+import { JiraIssueUpdateFields } from "../types";
 
 export const updateJiraIssue: Tool = {
   id: "updateJiraIssue",
@@ -43,7 +44,7 @@ export const updateJiraIssue: Tool = {
     const { issueKey, summary, description, priority } = args;
 
     try {
-      const fields: any = {};
+      const fields: JiraIssueUpdateFields = {};
 
       if (summary) {
         fields.summary = summary;

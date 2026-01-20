@@ -1,5 +1,6 @@
 import { Tool } from "open-api-connection-types";
 import { getJiraConfig, jiraRequest } from "../lib";
+import { JiraComment } from "../types";
 
 export const addJiraComment: Tool = {
   id: "addJiraComment",
@@ -27,7 +28,7 @@ export const addJiraComment: Tool = {
     const { issueKey, comment } = args;
 
     try {
-      const result = await jiraRequest(
+      const result: JiraComment = await jiraRequest(
         jiraConfig,
         `issue/${issueKey}/comment`,
         {

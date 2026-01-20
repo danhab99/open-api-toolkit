@@ -1,5 +1,6 @@
 import { Tool } from "open-api-connection-types";
 import { getJiraConfig, jiraRequest } from "../lib";
+import { JiraIssue } from "../types";
 
 export const getJiraIssue: Tool = {
   id: "getJiraIssue",
@@ -21,7 +22,7 @@ export const getJiraIssue: Tool = {
     const { issueKey } = args;
 
     try {
-      const result = await jiraRequest(jiraConfig, `issue/${issueKey}`);
+      const result: JiraIssue = await jiraRequest(jiraConfig, `issue/${issueKey}`);
 
       return {
         results: {

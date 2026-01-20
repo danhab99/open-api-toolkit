@@ -1,5 +1,6 @@
 import { Tool } from "open-api-connection-types";
 import { getJiraConfig, jiraRequest } from "../lib";
+import { JiraTransitionsResponse, JiraTransition } from "../types";
 
 export const transitionJiraIssue: Tool = {
   id: "transitionJiraIssue",
@@ -30,14 +31,14 @@ export const transitionJiraIssue: Tool = {
     const { issueKey, transitionName } = args;
 
     try {
-      const transitionsResult = await jiraRequest(
+      const transitionsResult: JiraTransitionsResponse = await jiraRequest(
         jiraConfig,
         `issue/${issueKey}/transitions`,
       );
 
       if (transitionName.toLowerCase() === "list") {
         const availableTransitions = transitionsResult.transitions.map(
-          (t: any) => ({
+          (t: JiraTransition) => ({
             id: t.id,
             name: t.name,
             to: t.to.name,
@@ -56,7 +57,7 @@ export const transitionJiraIssue: Tool = {
       }
 
       const transition = transitionsResult.transitions.find(
-        (t: any) =>
+        (t: JiraTransition) =>
           t.name.toLowerCase() === transitionName.toLowerCase() ||
           t.to.name.toLowerCase() === transitionName.toLowerCase(),
       );
@@ -67,7 +68,7 @@ export const transitionJiraIssue: Tool = {
             success: false,
             error: `Transition '${transitionName}' not found`,
             availableTransitions: transitionsResult.transitions.map(
-              (t: any) => t.name,
+              (t: JiraTransition) => t.name,
             ),
           },
           log: {

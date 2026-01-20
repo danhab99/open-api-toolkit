@@ -1,5 +1,6 @@
 import { Tool } from "open-api-connection-types";
 import { getJiraConfig, jiraRequest } from "../lib";
+import { JiraSearchResponse, JiraIssue } from "../types";
 
 export const searchJiraIssues: Tool = {
   id: "searchJiraIssues",
@@ -66,7 +67,7 @@ export const searchJiraIssues: Tool = {
         jql = conditions.length > 0 ? conditions.join(" AND ") : "";
       }
 
-      const result = await jiraRequest(jiraConfig, "search", {
+      const result: JiraSearchResponse = await jiraRequest(jiraConfig, "search", {
         method: "POST",
         body: JSON.stringify({
           jql: jql || undefined,
@@ -83,7 +84,7 @@ export const searchJiraIssues: Tool = {
         }),
       });
 
-      const issues = result.issues.map((issue: any) => ({
+      const issues = result.issues.map((issue: JiraIssue) => ({
         key: issue.key,
         id: issue.id,
         summary: issue.fields.summary,

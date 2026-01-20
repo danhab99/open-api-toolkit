@@ -1,5 +1,6 @@
 import { Tool } from "open-api-connection-types";
 import { getJiraConfig, jiraRequest } from "../lib";
+import { JiraCreateIssueResponse, JiraIssueUpdateFields } from "../types";
 
 export const createJiraIssue: Tool = {
   id: "createJiraIssue",
@@ -57,7 +58,7 @@ export const createJiraIssue: Tool = {
     } = args;
 
     try {
-      const fields: any = {
+      const fields: JiraIssueUpdateFields = {
         project: {
           key: projectKey,
         },
@@ -86,7 +87,7 @@ export const createJiraIssue: Tool = {
         fields.priority = { name: priority };
       }
 
-      const result = await jiraRequest(jiraConfig, "issue", {
+      const result: JiraCreateIssueResponse = await jiraRequest(jiraConfig, "issue", {
         method: "POST",
         body: JSON.stringify({ fields }),
       });
