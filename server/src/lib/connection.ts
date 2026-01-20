@@ -9,11 +9,18 @@ import {
   Connection as GoogleConnection,
   Tools as GoogleTools,
 } from "@open-api-connection/google";
+import {
+  Connection as JiraConnection,
+  Tools as JiraTools,
+} from "@open-api-connection/jira";
 
 const CONNECTIONS_PER_PAGE = 20;
 
 export async function getAllConnections() {
-  const Connections: OpenAPIConnectionDefinition[] = [GoogleConnection];
+  const Connections: OpenAPIConnectionDefinition[] = [
+    GoogleConnection,
+    JiraConnection,
+  ];
 
   return Connections;
 }
@@ -29,6 +36,7 @@ export async function importConnection(id: string) {
 export async function getTools(id: string) {
   const Tools = {
     [GoogleConnection.id]: GoogleTools,
+    [JiraConnection.id]: JiraTools,
   };
 
   return Tools[id];
