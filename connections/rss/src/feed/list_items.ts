@@ -11,7 +11,7 @@ export const listRSSItems: Tool = {
     {
       id: "limit",
       displayName: "Limit",
-      type: "string",
+      type: "number",
       userDescription: "Maximum number of items to return (optional)",
       aiDescription:
         "Maximum number of feed items to return. If not specified, all items are returned.",
@@ -28,7 +28,7 @@ export const listRSSItems: Tool = {
       let items = feed.items || [];
 
       if (limit) {
-        const limitNum = parseInt(limit as string, 10);
+        const limitNum = typeof limit === 'number' ? limit : parseInt(limit as string, 10);
         if (!isNaN(limitNum) && limitNum > 0) {
           items = items.slice(0, limitNum);
         }

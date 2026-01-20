@@ -11,7 +11,7 @@ export const getRSSItem: Tool = {
     {
       id: "index",
       displayName: "Item Index",
-      type: "string",
+      type: "number",
       userDescription:
         "Zero-based index of the item to retrieve (e.g., 0 for first item)",
       aiDescription:
@@ -26,7 +26,7 @@ export const getRSSItem: Tool = {
 
       const feed = await parser.parseURL(feedUrl);
 
-      const indexNum = parseInt(index as string, 10);
+      const indexNum = typeof index === 'number' ? index : parseInt(index as string, 10);
       if (isNaN(indexNum) || indexNum < 0) {
         return {
           results: {
