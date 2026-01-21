@@ -1,13 +1,13 @@
 {
-  "name": "connections",
+  "name": "@open-api-connection/google",
   "version": "1.0.0",
   "main": "src/index.ts",
   "license": "MIT",
   "dependencies": {
     "google-auth-library": "^9.15.1",
     "googleapis": "^149.0.0",
-    "open-api-connection-types": "workspace:*",
-    "open-api-prisma": "workspace:*",
+    "open-api-connector-types": "link:../../types",
+    "open-api-db": "link:../../prisma",
     "typescript": "^5.8.3"
   }
 }

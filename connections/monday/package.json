@@ -4,8 +4,8 @@
   "main": "src/index.ts",
   "license": "MIT",
   "dependencies": {
-    "open-api-connection-types": "link:../../types",
-    "open-api-prisma": "link:../../prisma",
+    "open-api-connector-types": "link:../../types",
+    "open-api-db": "link:../../prisma",
     "typescript": "^5.8.3"
   }
 }
