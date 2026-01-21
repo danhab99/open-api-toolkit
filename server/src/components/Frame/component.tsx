@@ -18,7 +18,7 @@ export function Frame(props: React.PropsWithChildren<FrameProps>) {
           {props.header}
         </div>
 
-        <div className="py-8">{props.children}</div>
+        <div className="pt-8 pb-0">{props.children}</div>
       </main>
     </>
   );
