@@ -27,7 +27,7 @@ export function ConnectionCard(props: ConnectionCardProps) {
   const router = useRouter();
 
   return (
-    <Card>
+    <Card className="flex flex-col justify-between overflow-hidden">
       <CardHeader>
         <div className="flex flex-row align-center gap-4">
           <Switch
@@ -41,19 +41,19 @@ export function ConnectionCard(props: ConnectionCardProps) {
         </div>
         <CardDescription>{props.connection.userDescription}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="overflow-hidden">
         <Table>
           <TableBody>
             {props.connection.config.map((config, i) => (
               <TableRow key={i}>
-                <TableCell>{`${config.displayName}`}</TableCell>
-                <TableCell>{config.value}</TableCell>
+                <TableCell className="truncate">{`${config.displayName}`}</TableCell>
+                <TableCell className="truncate">{config.value}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </CardContent>
-      <CardFooter className="flex justify-end gap-4">
+      <CardFooter className="flex justify-end gap-4 mt-auto">
         <Button
           variant="outline"
           onClick={async () => {
