@@ -10,6 +10,7 @@ import { deleteGoogleTask } from "./tasks/delete_task";
 import { editGoogleCalendarEvent } from "./calendar/edit_calendar";
 import { getGmailThread } from "./gmail/get_emails";
 import { listGmailMessages } from "./gmail/list_gmail";
+import { listGoogleContacts } from "./contacts/list_contacts";
 import { listGoogleDriveFiles } from "./drive/list_drive";
 import { listGoogleTasks } from "./tasks/list_tasks";
 import { moveGoogleDriveFile } from "./drive/move_doc";
@@ -56,6 +57,7 @@ export const Tools = [
   editGoogleCalendarEvent,
   getGmailThread,
   listGmailMessages,
+  listGoogleContacts,
   listGoogleDriveFiles,
   listGoogleTasks,
   moveGoogleDriveFile,
