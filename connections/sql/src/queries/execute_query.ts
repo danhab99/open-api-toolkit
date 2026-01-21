@@ -1,5 +1,5 @@
 import { Tool } from "open-api-connection-types";
-import { getSQLClient } from "../lib";
+import { getSQLClient, switchToDatabase } from "../lib";
 
 export const executeQuery: Tool = {
   id: "executeQuery",
@@ -50,17 +50,7 @@ export const executeQuery: Tool = {
 
       // Switch database if specified (only for MySQL and MSSQL)
       if (database) {
-        if (flavor === "mysql") {
-          await client.query(`USE \`${database}\``);
-        } else if (flavor === "mssql") {
-          await client.query(`USE [${database}]`);
-        } else if (flavor === "postgresql") {
-          await client.close();
-          throw new Error("PostgreSQL does not support runtime database switching. Create a new connection with the desired database.");
-        } else if (flavor === "sqlite") {
-          await client.close();
-          throw new Error("SQLite does not support database switching. Create a new connection for a different database file.");
-        }
+        await switchToDatabase(client, flavor as string, database as string);
       }
 
       const results = await client.query(query as string, params);

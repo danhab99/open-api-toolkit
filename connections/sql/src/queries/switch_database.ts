@@ -1,5 +1,5 @@
 import { Tool } from "open-api-connection-types";
-import { getSQLClient, getSQLConfig } from "../lib";
+import { getSQLClient, validateIdentifier } from "../lib";
 
 export const switchDatabase: Tool = {
   id: "switchDatabase",
@@ -37,14 +37,19 @@ export const switchDatabase: Tool = {
     const client = getSQLClient(config);
 
     try {
+      // Validate database name to prevent SQL injection
+      const safeDatabaseName = validateIdentifier(databaseName as string, "database name");
+      
       let query: string;
       
       switch (flavor) {
         case "mysql":
-          query = `USE \`${databaseName}\``;
+          // MySQL uses backticks for identifier quoting
+          query = `USE \`${safeDatabaseName}\``;
           break;
         case "postgresql":
           // PostgreSQL doesn't support USE statement, connections are database-specific
+          await client.close();
           return {
             results: {
               success: false,
@@ -57,7 +62,8 @@ export const switchDatabase: Tool = {
             },
           };
         case "mssql":
-          query = `USE [${databaseName}]`;
+          // MSSQL uses square brackets for identifier quoting
+          query = `USE [${safeDatabaseName}]`;
           break;
         default:
           throw new Error(`Unsupported SQL flavor: ${flavor}`);
@@ -69,12 +75,12 @@ export const switchDatabase: Tool = {
       return {
         results: {
           success: true,
-          database: databaseName,
+          database: safeDatabaseName,
         },
         log: {
-          message: `Switched to database: ${databaseName}`,
+          message: `Switched to database: ${safeDatabaseName}`,
           data: {
-            database: databaseName,
+            database: safeDatabaseName,
           },
         },
       };

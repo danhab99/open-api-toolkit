@@ -210,3 +210,60 @@ export function getSQLClient(config: KVP): SQLClient {
       throw new Error(`Unsupported SQL flavor: ${sqlConfig.flavor}`);
   }
 }
+
+/**
+ * Validates and sanitizes a database identifier (database name, table name, etc.)
+ * Prevents SQL injection by only allowing alphanumeric, underscore, and hyphen characters
+ */
+export function validateIdentifier(identifier: string, identifierType: string = "identifier"): string {
+  if (!identifier || typeof identifier !== 'string') {
+    throw new Error(`${identifierType} must be a non-empty string`);
+  }
+  
+  // Only allow alphanumeric characters, underscores, and hyphens
+  // This prevents SQL injection while supporting common naming conventions
+  if (!/^[a-zA-Z0-9_-]+$/.test(identifier)) {
+    throw new Error(
+      `Invalid ${identifierType}: "${identifier}". Only alphanumeric characters, underscores, and hyphens are allowed.`
+    );
+  }
+  
+  return identifier;
+}
+
+/**
+ * Switches the active database context for flavors that support it
+ * @param client - The SQL client to execute the switch command
+ * @param flavor - The SQL flavor (mysql, postgresql, sqlite, mssql)
+ * @param databaseName - The name of the database to switch to
+ * @throws Error if the flavor doesn't support database switching or if the database name is invalid
+ */
+export async function switchToDatabase(
+  client: SQLClient,
+  flavor: string,
+  databaseName: string
+): Promise<void> {
+  // Validate database name to prevent SQL injection
+  const safeDatabaseName = validateIdentifier(databaseName, "database name");
+  
+  switch (flavor) {
+    case "mysql":
+      // MySQL uses backticks for identifier quoting
+      await client.query(`USE \`${safeDatabaseName}\``);
+      break;
+    case "mssql":
+      // MSSQL uses square brackets for identifier quoting
+      await client.query(`USE [${safeDatabaseName}]`);
+      break;
+    case "postgresql":
+      throw new Error(
+        "PostgreSQL does not support runtime database switching. Create a new connection with the desired database."
+      );
+    case "sqlite":
+      throw new Error(
+        "SQLite does not support database switching. Create a new connection for a different database file."
+      );
+    default:
+      throw new Error(`Unsupported SQL flavor for database switching: ${flavor}`);
+  }
+}
