@@ -72,7 +72,13 @@ class PostgreSQLClient implements SQLClient {
 
   async query(sql: string, params?: any[]): Promise<any> {
     const pool = this.getPool();
-    const result = await pool.query(sql, params);
+    // PostgreSQL uses $1, $2, etc. for parameters, so we need to convert ? to $n
+    let pgSql = sql;
+    if (params && params.length > 0) {
+      let index = 0;
+      pgSql = sql.replace(/\?/g, () => `$${++index}`);
+    }
+    const result = await pool.query(pgSql, params);
     return result.rows;
   }
 
@@ -145,14 +151,18 @@ class MSSQLClient implements SQLClient {
     const pool = await this.getPool();
     const request = pool.request();
     
-    // Add parameters if provided
-    if (params) {
+    // MSSQL uses named parameters (@param0, @param1, etc.)
+    let mssqlQuery = sqlQuery;
+    if (params && params.length > 0) {
       params.forEach((param, index) => {
         request.input(`param${index}`, param);
       });
+      // Replace ? placeholders with @param0, @param1, etc.
+      let paramIndex = 0;
+      mssqlQuery = sqlQuery.replace(/\?/g, () => `@param${paramIndex++}`);
     }
 
-    const result = await request.query(sqlQuery);
+    const result = await request.query(mssqlQuery);
     return result.recordset;
   }
 

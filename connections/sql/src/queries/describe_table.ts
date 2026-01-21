@@ -30,6 +30,7 @@ export const describeTable: Tool = {
           query = `DESCRIBE ${tableName}`;
           break;
         case "postgresql":
+          // PostgreSQL uses $1 instead of ? - we'll let the client convert it
           query = `SELECT column_name, data_type, is_nullable, column_default 
                    FROM information_schema.columns 
                    WHERE table_name = ?`;
@@ -39,6 +40,7 @@ export const describeTable: Tool = {
           query = `PRAGMA table_info(${tableName})`;
           break;
         case "mssql":
+          // MSSQL will convert ? to @param0 in the client
           query = `SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE, COLUMN_DEFAULT 
                    FROM INFORMATION_SCHEMA.COLUMNS 
                    WHERE TABLE_NAME = ?`;

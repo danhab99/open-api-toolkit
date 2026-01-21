@@ -42,11 +42,20 @@ export const executeQuery: Tool = {
       const results = await client.query(query as string, params);
       await client.close();
 
+      // Handle different result formats from different databases
+      let rowCount = 0;
+      if (Array.isArray(results)) {
+        rowCount = results.length;
+      } else if (results && typeof results === 'object') {
+        // SQLite insert/update/delete returns { changes, lastInsertRowid }
+        rowCount = results.changes || results.affectedRows || results.rowCount || 0;
+      }
+
       return {
         results: {
           success: true,
           data: results,
-          rowCount: Array.isArray(results) ? results.length : results.affectedRows || 0,
+          rowCount,
         },
         log: {
           message: `Query executed successfully`,
