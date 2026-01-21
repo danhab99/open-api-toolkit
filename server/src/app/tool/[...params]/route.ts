@@ -7,6 +7,20 @@ async function handler(req: NextRequest) {
 
   const [, , id, toolName] = url.pathname.split("/");
 
+  const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "*",
+    "Access-Control-Allow-Credentials": "true",
+  };
+
+  if (req.method === "OPTIONS") {
+    return new NextResponse(null, {
+      status: 204,
+      headers: corsHeaders,
+    });
+  }
+
   try {
     const results = await executeToolCall(
       parseInt(id),
@@ -18,6 +32,7 @@ async function handler(req: NextRequest) {
       statusText: `tool ${id}/${toolName} ran successfully`,
       headers: {
         "Content-Type": "application/json",
+        ...corsHeaders,
       },
     });
   } catch (e) {
@@ -31,6 +46,7 @@ async function handler(req: NextRequest) {
       statusText: `tool ${id}/${toolName} threw an error`,
       headers: {
         "Content-Type": "application/json",
+        ...corsHeaders,
       },
     });
   }

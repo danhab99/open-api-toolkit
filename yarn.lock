@@ -1006,29 +1006,29 @@
   dependencies:
     google-auth-library "^9.15.1"
     googleapis "^149.0.0"
-    open-api-connector-types "link:../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-972a3d7f-ada5-4fbd-9c5e-98ce48ffb710-1768967604858/node_modules/types"
-    open-api-db "link:../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-972a3d7f-ada5-4fbd-9c5e-98ce48ffb710-1768967604858/node_modules/prisma"
+    open-api-connector-types "link:../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-8f42f153-7e1a-428e-be87-297ce7ab7717-1768969855713/node_modules/types"
+    open-api-db "link:../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-8f42f153-7e1a-428e-be87-297ce7ab7717-1768969855713/node_modules/prisma"
     typescript "^5.8.3"
 
 "@open-api-connection/jira@file:connections/jira":
   version "1.0.0"
   dependencies:
-    open-api-connector-types "link:../../../.cache/yarn/v6/npm-@open-api-connection-jira-1.0.0-7453700e-a8c0-42ea-9feb-7c15c5eb2b99-1768967604860/node_modules/types"
-    open-api-db "link:../../../.cache/yarn/v6/npm-@open-api-connection-jira-1.0.0-7453700e-a8c0-42ea-9feb-7c15c5eb2b99-1768967604860/node_modules/prisma"
+    open-api-connector-types "link:../../../.cache/yarn/v6/npm-@open-api-connection-jira-1.0.0-bc67fbf6-4a89-46aa-b533-45d9fb077993-1768969855715/node_modules/types"
+    open-api-db "link:../../../.cache/yarn/v6/npm-@open-api-connection-jira-1.0.0-bc67fbf6-4a89-46aa-b533-45d9fb077993-1768969855715/node_modules/prisma"
     typescript "^5.8.3"
 
 "@open-api-connection/monday@file:connections/monday":
   version "1.0.0"
   dependencies:
-    open-api-connector-types "link:../../../.cache/yarn/v6/npm-@open-api-connection-monday-1.0.0-a5277050-f7e4-4437-90e0-e02e48e05e1c-1768967604860/node_modules/types"
-    open-api-db "link:../../../.cache/yarn/v6/npm-@open-api-connection-monday-1.0.0-a5277050-f7e4-4437-90e0-e02e48e05e1c-1768967604860/node_modules/prisma"
+    open-api-connector-types "link:../../../.cache/yarn/v6/npm-@open-api-connection-monday-1.0.0-599bc418-4d32-4642-8d02-bc2c53cfd0eb-1768969855714/node_modules/types"
+    open-api-db "link:../../../.cache/yarn/v6/npm-@open-api-connection-monday-1.0.0-599bc418-4d32-4642-8d02-bc2c53cfd0eb-1768969855714/node_modules/prisma"
     typescript "^5.8.3"
 
 "@open-api-connection/rss@file:connections/rss":
   version "1.0.0"
   dependencies:
-    open-api-connector-types "link:../../../.cache/yarn/v6/npm-@open-api-connection-rss-1.0.0-319dca58-bd01-4018-9fd2-47b95c80ce87-1768967604867/node_modules/types"
-    open-api-db "link:../../../.cache/yarn/v6/npm-@open-api-connection-rss-1.0.0-319dca58-bd01-4018-9fd2-47b95c80ce87-1768967604867/node_modules/prisma"
+    open-api-connector-types "link:../../../.cache/yarn/v6/npm-@open-api-connection-rss-1.0.0-087de84f-42e6-4bbf-a63a-394d53b75685-1768969855721/node_modules/types"
+    open-api-db "link:../../../.cache/yarn/v6/npm-@open-api-connection-rss-1.0.0-087de84f-42e6-4bbf-a63a-394d53b75685-1768969855721/node_modules/prisma"
     rss-parser "^3.13.0"
     typescript "^5.8.3"
 
