@@ -51,7 +51,7 @@ export async function executeToolCall(
         data: JSON.stringify(results.log?.data ?? {}),
       },
     });
-    console.log("Tool call executed successfully");
+    console.log("Tool call executed successfully", results.log?.message);
     return results;
   } catch (e: any) {
     await db.auditLog.create({
@@ -61,7 +61,7 @@ export async function executeToolCall(
         data: JSON.stringify(e ?? {}),
       },
     });
-    console.log("Tool call failed with error");
+    console.log("Tool call failed with error", e);
     throw e;
   }
 }
