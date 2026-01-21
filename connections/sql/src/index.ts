@@ -2,13 +2,15 @@ import { OpenAPIConnectionDefinition, Tool } from "open-api-connection-types";
 import { executeQuery } from "./queries/execute_query";
 import { listTables } from "./queries/list_tables";
 import { describeTable } from "./queries/describe_table";
+import { listDatabases } from "./queries/list_databases";
+import { switchDatabase } from "./queries/switch_database";
 
 export const Connection: OpenAPIConnectionDefinition = {
   id: "sql",
   displayName: "SQL Database",
-  userDescription: "Connects to MySQL, PostgreSQL, SQLite, or MSSQL databases",
+  userDescription: "Connects to MySQL, PostgreSQL, SQLite, or MSSQL databases with multi-database access",
   aiDescription:
-    "Allows tools to execute queries and manage data in SQL databases (MySQL, PostgreSQL, SQLite, MSSQL)",
+    "Allows tools to execute queries and manage data across multiple SQL databases (MySQL, PostgreSQL, SQLite, MSSQL) on a server",
   configurationArguments: [
     {
       id: "flavor",
@@ -37,8 +39,8 @@ export const Connection: OpenAPIConnectionDefinition = {
     {
       id: "database",
       displayName: "Database Name",
-      userDescription: "Name of the database to connect to",
-      aiDescription: "The name of the database/schema to use",
+      userDescription: "Default database name to connect to (optional for server-level access)",
+      aiDescription: "The name of the default database/schema to use. Can be omitted to connect at server level and access multiple databases.",
       type: "string",
     },
     {
@@ -69,6 +71,8 @@ export const Connection: OpenAPIConnectionDefinition = {
 };
 
 export const Tools: Tool[] = [
+  listDatabases,
+  switchDatabase,
   executeQuery,
   listTables,
   describeTable,

@@ -7,12 +7,37 @@ export const listTables: Tool = {
   userDescription: "Lists all tables in the configured database",
   aiDescription:
     "Retrieves a list of all tables in the database. Different SQL flavors use different system queries.",
-  arguments: [],
+  arguments: [
+    {
+      id: "database",
+      displayName: "Database Name",
+      type: "string",
+      userDescription: "Specific database to list tables from (optional)",
+      aiDescription:
+        "Optional database name to list tables from. If not specified, uses the configured database. Only supported for MySQL and MSSQL.",
+    },
+  ],
   async handler(config, args) {
     const client = getSQLClient(config);
     const { flavor } = config;
+    const { database } = args;
 
     try {
+      // Switch database if specified (only for MySQL and MSSQL)
+      if (database) {
+        if (flavor === "mysql") {
+          await client.query(`USE \`${database}\``);
+        } else if (flavor === "mssql") {
+          await client.query(`USE [${database}]`);
+        } else if (flavor === "postgresql") {
+          await client.close();
+          throw new Error("PostgreSQL does not support runtime database switching. Create a new connection with the desired database.");
+        } else if (flavor === "sqlite") {
+          await client.close();
+          throw new Error("SQLite does not support database switching. Create a new connection for a different database file.");
+        }
+      }
+
       let query: string;
       
       switch (flavor) {

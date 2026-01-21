@@ -24,10 +24,19 @@ export const executeQuery: Tool = {
       aiDescription:
         "Optional JSON array of parameters to bind to the query placeholders. Helps prevent SQL injection.",
     },
+    {
+      id: "database",
+      displayName: "Database Name",
+      type: "string",
+      userDescription: "Specific database to use for this query (optional)",
+      aiDescription:
+        "Optional database name to use for this query. If specified, switches to this database before executing the query. Only supported for MySQL and MSSQL.",
+    },
   ],
   async handler(config, args) {
     const client = getSQLClient(config);
-    const { query, parameters } = args;
+    const { query, parameters, database } = args;
+    const { flavor } = config;
 
     try {
       let params: any[] | undefined;
@@ -36,6 +45,21 @@ export const executeQuery: Tool = {
           params = JSON.parse(parameters as string);
         } catch (e) {
           throw new Error("Invalid parameters format. Expected JSON array.");
+        }
+      }
+
+      // Switch database if specified (only for MySQL and MSSQL)
+      if (database) {
+        if (flavor === "mysql") {
+          await client.query(`USE \`${database}\``);
+        } else if (flavor === "mssql") {
+          await client.query(`USE [${database}]`);
+        } else if (flavor === "postgresql") {
+          await client.close();
+          throw new Error("PostgreSQL does not support runtime database switching. Create a new connection with the desired database.");
+        } else if (flavor === "sqlite") {
+          await client.close();
+          throw new Error("SQLite does not support database switching. Create a new connection for a different database file.");
         }
       }
 
