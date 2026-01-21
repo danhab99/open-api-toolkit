@@ -16,6 +16,7 @@
     "@open-api-connection/monday": "file:../connections/monday",
     "@open-api-connection/jira": "file:../connections/jira",
     "@open-api-connection/rss": "file:../connections/rss",
+    "@open-api-connection/sql": "file:../connections/sql",
     "@prisma/client": "^6.8.2",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-alert-dialog": "^1.1.14",

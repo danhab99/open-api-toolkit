@@ -1,0 +1,20 @@
+{
+  "name": "@open-api-connection/sql",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "open-api-connection-types": "link:../../types",
+    "open-api-prisma": "link:../../prisma",
+    "mysql2": "^3.11.5",
+    "pg": "^8.13.1",
+    "better-sqlite3": "^11.8.0",
+    "mssql": "^11.0.1",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.10",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/mssql": "^9.1.5"
+  }
+}

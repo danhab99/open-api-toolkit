@@ -22,6 +22,10 @@ import {
   Connection as RSSConnection,
   Tools as RSSTools,
 } from "@open-api-connection/rss";
+import {
+  Connection as SQLConnection,
+  Tools as SQLTools,
+} from "@open-api-connection/sql";
 
 
 const CONNECTIONS_PER_PAGE = 20;
@@ -32,6 +36,7 @@ export async function getAllConnections() {
     RSSConnection,
     JiraConnection,
     MondayConnection,
+    SQLConnection,
   ];
   return Connections;
 }
@@ -50,6 +55,7 @@ export async function getTools(id: string) {
     [MondayConnection.id]: MondayTools,
     [JiraConnection.id]: JiraTools,
     [RSSConnection.id]: RSSTools,
+    [SQLConnection.id]: SQLTools,
   };
 
   return Tools[id];
