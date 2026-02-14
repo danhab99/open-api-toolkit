@@ -1006,29 +1006,29 @@
   dependencies:
     google-auth-library "^9.15.1"
     googleapis "^149.0.0"
-    open-api-connector-types "link:../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-8f42f153-7e1a-428e-be87-297ce7ab7717-1768969855713/node_modules/types"
-    open-api-db "link:../../../.cache/yarn/v6/npm-@open-api-connection-google-1.0.0-8f42f153-7e1a-428e-be87-297ce7ab7717-1768969855713/node_modules/prisma"
+    open-api-connector-types "link:types"
+    open-api-db "link:prisma"
     typescript "^5.8.3"
 
 "@open-api-connection/jira@file:connections/jira":
   version "1.0.0"
   dependencies:
-    open-api-connector-types "link:../../../.cache/yarn/v6/npm-@open-api-connection-jira-1.0.0-bc67fbf6-4a89-46aa-b533-45d9fb077993-1768969855715/node_modules/types"
-    open-api-db "link:../../../.cache/yarn/v6/npm-@open-api-connection-jira-1.0.0-bc67fbf6-4a89-46aa-b533-45d9fb077993-1768969855715/node_modules/prisma"
+    open-api-connector-types "link:types"
+    open-api-db "link:prisma"
     typescript "^5.8.3"
 
 "@open-api-connection/monday@file:connections/monday":
   version "1.0.0"
   dependencies:
-    open-api-connector-types "link:../../../.cache/yarn/v6/npm-@open-api-connection-monday-1.0.0-599bc418-4d32-4642-8d02-bc2c53cfd0eb-1768969855714/node_modules/types"
-    open-api-db "link:../../../.cache/yarn/v6/npm-@open-api-connection-monday-1.0.0-599bc418-4d32-4642-8d02-bc2c53cfd0eb-1768969855714/node_modules/prisma"
+    open-api-connector-types "link:types"
+    open-api-db "link:prisma"
     typescript "^5.8.3"
 
 "@open-api-connection/rss@file:connections/rss":
   version "1.0.0"
   dependencies:
-    open-api-connector-types "link:../../../.cache/yarn/v6/npm-@open-api-connection-rss-1.0.0-087de84f-42e6-4bbf-a63a-394d53b75685-1768969855721/node_modules/types"
-    open-api-db "link:../../../.cache/yarn/v6/npm-@open-api-connection-rss-1.0.0-087de84f-42e6-4bbf-a63a-394d53b75685-1768969855721/node_modules/prisma"
+    open-api-connector-types "link:types"
+    open-api-db "link:prisma"
     rss-parser "^3.13.0"
     typescript "^5.8.3"
 
@@ -5582,9 +5582,9 @@ pure-rand@^6.1.0:
   integrity sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA==
 
 qs@^6.7.0:
-  version "6.14.1"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.14.1.tgz#a41d85b9d3902f31d27861790506294881871159"
-  integrity sha512-4EK3+xJl8Ts67nLYNwqw/dsFVnCf+qR7RgXSK9jEEm9unao3njwMDdmsdvoKBKHzxd7tCYz5e5M+SnMjdtXGQQ==
+  version "6.14.2"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.14.2.tgz#b5634cf9d9ad9898e31fba3504e866e8efb6798c"
+  integrity sha512-V/yCWTTF7VJ9hIh18Ugr2zhJMP01MY7c5kh4J870L7imm6/DIzBsNLTXzMwUA3yZ5b/KBqLx8Kp3uRvd7xSe3Q==
   dependencies:
     side-channel "^1.1.0"
 
